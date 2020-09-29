@@ -1,0 +1,43 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(Windows) Run",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/project/cmake-win/build/Debug/pracs_ig_exe.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/project",
+            "environment": [],
+            "externalConsole": false
+        },
+        {
+            "name": "(Windows) Compile and run",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/project/cmake-win/build/Debug/pracs_ig_exe.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/project",
+            "environment": [],
+            "externalConsole": false,
+            "preLaunchTask": "compile",
+        },
+        {
+            "name": "(Windows) Recompile everything and run",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/project/cmake-win/build/Debug/pracs_ig_exe.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/project",
+            "environment": [],
+            "externalConsole": false,
+            "preLaunchTask": "clean and compile",
+        }
+    ]
+}
