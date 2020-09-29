@@ -198,13 +198,10 @@ void DescrTabla::activar_mi()
       exit(1);
    }
    CError();
-   // COMPLETAR: práctica 1: activar la tabla en modo inmediato
-   // (hay que invocar a 'fijarPuntero' y luego a 'glEnableClientState')
-   //
-   // .....
 
+   fijarPuntero(datos);             // Especifica localización y formato
+   glEnableClientState(atributo);   // Habilita el uso de la tabla
 
-   // hecho
    CError();
 }
 // -----------------------------------------------------------------------------
