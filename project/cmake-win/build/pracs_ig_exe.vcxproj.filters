@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\animacion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\array-verts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\camara.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\escena.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\grafo-escena.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\malla-ind.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\malla-revol.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\materiales-luces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\objeto3d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\src\seleccion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\src\cauce.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\src\fbo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\src\ig-aux.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\src\lector-jpg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\src\lector-ply.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\src\matrices-tr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\animacion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\array-verts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\camara.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\escena.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\exp4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\grafo-escena.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\malla-ind.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\malla-revol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\materiales-luces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\objeto3d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\practicas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\include\seleccion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\cauce.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\fbo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\ig-aux.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\lector-jpg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\lector-ply.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\matrices-tr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\matrizg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\matrizg_impl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\tuplasg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\recursos\include\tuplasg_impl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Andre\Box Sync\Universidad\Cuarto\Primer cuatrimestre\IG\Prácticas\plantilla\cmake-win\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{F378DF84-438D-35ED-8C38-72F8AFB5122A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{DA1C6372-0A34-3E7E-9015-632FEF9142C5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
