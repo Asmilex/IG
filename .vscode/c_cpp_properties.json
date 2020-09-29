@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/project/include",
+                "${workspaceFolder}/recursos/include",
+                "${workspaceFolder}/recursos/packages-win/nupengl.core.0.1.0.1/build/native/include/GLFW/",
+                "${workspaceFolder}/recursos/packages-win/nupengl.core.0.1.0.1/build/native/include/GL/",
+                "${workspaceFolder}/recursos/packages-win/libjpeg.9.2.0.1/build/native/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.17763.0"
+        }
+    ],
+    "version": 4
+
+}
