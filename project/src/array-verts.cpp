@@ -412,13 +412,39 @@ void ArrayVertices::visualizarGL_MI_DAE( const GLenum tipo_primitiva )
    assert( coordenadas != nullptr );
    CError();
 
-   // COMPLETAR: práctica 1: visualizar array de vértices en modo inmediato usando las funciones
-   //  'glDrawArrays' (si no está indexado) o 'glDrawElements' (si está indexado)
-   // * antes de visualizar es necesario activar las tablas no vacías (en modo inmediato)
-   // * se debe activar el VAO pordefecto (VAO 0) al inicio
-   // * se deben de deshabilitar todas las tablas, al inicio y al final.
-   // ...........
+   /*
+      Tareas a realizar:
+         1. Activar VAO por defecto
+         2. Activar tablas no vacías (en modo inmediato)
+         3. Deshabilitar todas las tablas al inicio y al final
+         4. Dibujarlo según esté indexada o no.
 
+   */
+
+   glBindVertexArray(0);
+   deshabilitar_tablas();
+
+   coordenadas->activar_mi();
+
+   if (colores != nullptr) {
+      colores->activar_mi;
+   }
+   if (normales != nullptr) {
+      normales->activar_mi;
+   }
+   if (coords_textura != nullptr) {
+      coords_textura->activar_mi();
+   }
+
+   // Comprobar si estamos usando índices
+   if (indices != nullptr) {
+      glDrawElements(tipo_primitiva, num_indices, indices->tipo_valores, indices->datos);
+   }
+   else {
+      glDrawArrays(tipo_primitiva, 0, num_vertices);
+   }
+
+   deshabilitar_tablas();
 
    CError();
 }
