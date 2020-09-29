@@ -1,9 +1,15 @@
 # IG
 Prácticas de la asignatura Informática Gráfica
 
+## Práctica 1
+
+> En la primera práctica se completará el código de creación (constructor) de la clase Escena1, derivada de Escena. La clase Escena1 contendrá varios objetos de clases derivadas de MallaInd. Cada uno de esos objetos contiene las tablas de coordenadas de vértices, atributos e indices correspondientes a una malla indexada.
+
 ## Windows
 
 > Dependencias: cmake, ¿Visual Studio?
+
+Las tareas están configuradas para que funcione todo directamente. Solo dependen de `cmake`. No obstante, **se asume que el shell predeterminado es `cmd`**.
 
 ### A mano
 
