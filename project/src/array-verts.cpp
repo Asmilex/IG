@@ -11,34 +11,34 @@
 
 // -----------------------------------------------------------------------------
 
-const std::vector<GLenum> valores_tipo_tabla = 
-{  
+const std::vector<GLenum> valores_tipo_tabla =
+{
    GL_ARRAY_BUFFER,
    GL_ELEMENT_ARRAY_BUFFER
 };
 
-const std::vector<GLenum> valores_atributo = 
-{  
-   GL_VERTEX_ARRAY, 
+const std::vector<GLenum> valores_atributo =
+{
+   GL_VERTEX_ARRAY,
    GL_TEXTURE_COORD_ARRAY,
-   GL_COLOR_ARRAY, 
-   GL_NORMAL_ARRAY 
+   GL_COLOR_ARRAY,
+   GL_NORMAL_ARRAY
 };
 
-const std::vector<GLenum> tipos_numericos_atributos = 
-{  
-   GL_FLOAT, 
+const std::vector<GLenum> tipos_numericos_atributos =
+{
+   GL_FLOAT,
    GL_DOUBLE
 };
 
-const std::vector<GLenum> tipos_numericos_indices = 
-{  
-   GL_UNSIGNED_BYTE, 
+const std::vector<GLenum> tipos_numericos_indices =
+{
+   GL_UNSIGNED_BYTE,
    GL_UNSIGNED_SHORT,
    GL_UNSIGNED_INT
 };
 // -----------------------------------------------------------------------------
-// devuelve cuantos bytes ocupa un valor numérico del tipo de datos OpenGL 
+// devuelve cuantos bytes ocupa un valor numérico del tipo de datos OpenGL
 // especificado por el parámetro 'tipo'
 
 unsigned NumBytesValor( const GLenum tipo )
@@ -46,13 +46,13 @@ unsigned NumBytesValor( const GLenum tipo )
    using namespace std ;
    switch( tipo )
    {
-      case GL_FLOAT          : return sizeof( GLfloat );  
-      case GL_DOUBLE         : return sizeof( GLdouble ); 
-      case GL_UNSIGNED_BYTE  : return sizeof( GLubyte );  
-      case GL_UNSIGNED_SHORT : return sizeof( GLushort ); 
-      case GL_UNSIGNED_INT   : return sizeof( GLuint );  
-      default : 
-         cout << "error: valor incorrecto de 'tipo' en 'NumBytesValor(..)'." << endl ; 
+      case GL_FLOAT          : return sizeof( GLfloat );
+      case GL_DOUBLE         : return sizeof( GLdouble );
+      case GL_UNSIGNED_BYTE  : return sizeof( GLubyte );
+      case GL_UNSIGNED_SHORT : return sizeof( GLushort );
+      case GL_UNSIGNED_INT   : return sizeof( GLuint );
+      default :
+         cout << "error: valor incorrecto de 'tipo' en 'NumBytesValor(..)'." << endl ;
          exit(1);
    }
 }
@@ -75,7 +75,7 @@ bool incluye( const std::vector<GLenum> & vec, const GLenum val )
 //
 // -----------------------------------------------------------------------------
 
-DescrTabla::DescrTabla( const GLenum  p_tipo_tabla,      const GLenum   p_atributo, 
+DescrTabla::DescrTabla( const GLenum  p_tipo_tabla,      const GLenum   p_atributo,
                           const GLenum  p_tipo_valores,    const GLint    p_num_vals_tupla,
                           const GLsizei p_num_tuplas_ind,  const GLvoid * p_datos )
 {
@@ -96,14 +96,14 @@ DescrTabla::DescrTabla( const GLenum  p_tipo_tabla,      const GLenum   p_atribu
 
 }
 // -----------------------------------------------------------------------------
-// comprueba que el descriptor de buffer está en un estado correcto, si no lo está 
+// comprueba que el descriptor de buffer está en un estado correcto, si no lo está
 // imprime mensaje explicativo y aborta el programa
 
 void DescrTabla::comprobar()
 {
    using namespace std ;
 
-   if ( ! incluye( valores_tipo_tabla, tipo_tabla ) )  
+   if ( ! incluye( valores_tipo_tabla, tipo_tabla ) )
    {
       cout << "error: 'p_tipo_tabla' incorrecto en 'DescrTabla::DescrTabla()'" << endl ;
       exit(1);
@@ -122,7 +122,7 @@ void DescrTabla::comprobar()
    if ( tipo_tabla == GL_ARRAY_BUFFER ) // tabla de coordenadas o atributos
    {
       if ( ! incluye( valores_atributo, atributo ) )
-      {  
+      {
          cout << "error: valor incorrecto de 'p_atributo' en 'DescrTabla::DescrTabla()'" << endl ;
          exit(1);
       }
@@ -167,19 +167,19 @@ DescrTabla::~DescrTabla()
    // si se ha reservado memoria en la GPU, liberarla
    if ( nombre_vbo != 0 )
       glDeleteBuffers( 1, &nombre_vbo );
-   
+
 }
 // -----------------------------------------------------------------------------
 // Establece donde están los datos en RAM o en la GPU (usando OpenGL 2.0)
-//   'ptr_offset' es o bien un puntero en RAM (para modo inmediato), o bien un 
+//   'ptr_offset' es o bien un puntero en RAM (para modo inmediato), o bien un
 //   offset en un VBO de la GPU (típicamente 0) (para modo diferido)
 
 void DescrTabla::fijarPuntero( const GLvoid * ptr_offset )
 {
    using namespace std ;
    assert( tipo_tabla == GL_ARRAY_BUFFER );
-   // COMPLETAR: práctica 1: indicar localización y formato de tabla (hay que invocar 
-   // a 'glVertexPointer' o 'glTexCoordPointer' o 'glColorPointer' o 'glNormalPointer', 
+   // COMPLETAR: práctica 1: indicar localización y formato de tabla (hay que invocar
+   // a 'glVertexPointer' o 'glTexCoordPointer' o 'glColorPointer' o 'glNormalPointer',
    // según que atributo se codifica en la tabla)
    //
    // .....
@@ -215,13 +215,13 @@ void DescrTabla::activar_md()
    CError();
 
    // COMPLETAR: práctica 1: activar la tabla en modo diferido
-   // 1. Crea el VBO si es necesario (la primera vez), 
+   // 1. Crea el VBO si es necesario (la primera vez),
    // 2. Activa (hace 'bind') el buffer en la GPU, después:
    //     2.1. En el caso de los índices, no hace nada más, deja el buffer 'binded'
    //     2.2. En el caso de los atributos: fija el puntero, hace 'unbind' del buffer, habilita uso de la tabla
    // ......
 
-   CError();    
+   CError();
 }
 
 // ******************************************************************************
@@ -231,7 +231,7 @@ void DescrTabla::activar_md()
 // -----------------------------------------------------------------------------
 
 // Constructor: crea un array de vértices, indicando las coordenadas de los mismos
-ArrayVertices::ArrayVertices( const GLenum tipo_valores, const GLint num_vals_tupla, 
+ArrayVertices::ArrayVertices( const GLenum tipo_valores, const GLint num_vals_tupla,
                               const GLsizei p_num_vertices,   const GLvoid * datos )
 {
    assert( datos != nullptr );
@@ -247,7 +247,7 @@ ArrayVertices::ArrayVertices( const GLenum tipo_valores, const GLint num_vals_tu
 }
 
 // -----------------------------------------------------------------------------
-// destructor: destruye los buffers (libera memoria ocupada en la GPU, si hay alguna, 
+// destructor: destruye los buffers (libera memoria ocupada en la GPU, si hay alguna,
 // no destruye ni modifica las tablas en RAM)
 
 ArrayVertices::~ArrayVertices()
@@ -259,7 +259,7 @@ ArrayVertices::~ArrayVertices()
    delete indices ;
 }
  // -----------------------------------------------------------------------------
-  
+
 // ;étodos para establecer las tablas de atributos (son opcionales)
 // (se asume que el numero de tuplas en cada tabla coincide con el número de vértices especificados en el constructor)
 
@@ -270,7 +270,7 @@ void ArrayVertices::fijarColores( const GLenum tipo_valores, const GLint num_val
    assert( datos != nullptr );
    assert( incluye( tipos_numericos_atributos, tipo_valores ) );
    assert( num_vals_tupla == 2 || num_vals_tupla == 3 || num_vals_tupla == 4 );
-   
+
    // crear descriptor de buffer
    colores = new DescrTabla( GL_ARRAY_BUFFER, GL_COLOR_ARRAY, tipo_valores, num_vals_tupla, num_vertices, datos );
    assert( colores != nullptr );
@@ -292,7 +292,7 @@ void ArrayVertices::fijarCoordText( const GLenum tipo_valores, const GLint num_v
 // -----------------------------------------------------------------------------
 // Establece puntero a la tabla de normales de vértices (se asumen 3 reales por normal)
 
-void ArrayVertices::fijarNormales( const GLenum tipo_valores, const GLvoid *datos )  
+void ArrayVertices::fijarNormales( const GLenum tipo_valores, const GLvoid *datos )
 {
    // comprobar que los parámetros son correctos
    assert( datos != nullptr );
@@ -303,7 +303,7 @@ void ArrayVertices::fijarNormales( const GLenum tipo_valores, const GLvoid *dato
    assert( normales != nullptr );
 }
 // -----------------------------------------------------------------------------
-// Método para establecer puntero a la tabla de índices (es opcional) 
+// Método para establecer puntero a la tabla de índices (es opcional)
 
 void ArrayVertices::fijarIndices( const GLenum tipo_valores, const GLsizei p_num_indices, const GLvoid * datos )
 {
@@ -318,11 +318,11 @@ void ArrayVertices::fijarIndices( const GLenum tipo_valores, const GLsizei p_num
 }
 
 // -----------------------------------------------------------------------------
-// Comprobar que el formato de las tablas es el esperado antes de visualizar con begin/end, 
-// (la visualización con begin/end solo va a funcionar para instancias de 'ArrayVerts' con 
-// datos flotantes en simple precisión (float), con tres valores por tupla, excepto la tabla 
+// Comprobar que el formato de las tablas es el esperado antes de visualizar con begin/end,
+// (la visualización con begin/end solo va a funcionar para instancias de 'ArrayVerts' con
+// datos flotantes en simple precisión (float), con tres valores por tupla, excepto la tabla
 // de coordenadas de textura con dos valores por tupla)
-// Si el formato no es el adecuado el programa aborta (la función 'assert' se invoca 
+// Si el formato no es el adecuado el programa aborta (la función 'assert' se invoca
 // con 'false' como argumento)
 
 void ArrayVertices::comprobarFormato_MI_BVE()
@@ -350,16 +350,14 @@ void ArrayVertices::comprobarFormato_MI_BVE()
 }
 
 // -----------------------------------------------------------------------------
-// Métodos que visualizan el array de vértices (no modifcan estado de OpenGL, excepto 
+// Métodos que visualizan el array de vértices (no modifcan estado de OpenGL, excepto
 // los punteros a buffers que al final quedan todos deshabilitados)
 // 'mode' indica el tipo de primitiva: GL_TRIANGLES, GL_LINES, GL_POLYGON, etc....
 
 // -----------------------------------------------------------------------------
 // Visualizar en modo inmediato, usando  una llamada por vértice (glBegin/glVertex/glEnd)
-// Se asume que las coordenadas, colores y normales son tuplas de 3 float (no doubles), y las 
-// coords de textura tuplas de 2 flotantes. Los indices son 'unsigned int'
 
-void ArrayVertices::visualizarGL_MI_BVE( const GLenum tipo_primitiva ) 
+void ArrayVertices::visualizarGL_MI_BVE( const GLenum tipo_primitiva )
 {
    CError();
    // comprobar que el formato de las tablas es el único que acepta este método
@@ -367,18 +365,49 @@ void ArrayVertices::visualizarGL_MI_BVE( const GLenum tipo_primitiva )
    assert( coordenadas != nullptr );
    comprobarFormato_MI_BVE();
 
-   // COMPLETAR: práctica 1: visualizar array de vértices en modo inmediato con begin/end
-   // .........
+   /*
+      Si hay índices, recorrer los vértices en el orden dado.
+      En otro caso, recorrerlos conforme nos los encontramos.
+
+      Debemos enviar los atributos correspondientes a cada vértice si es que existieran.
+      Se asume que las coordenadas, colores y normales son tuplas de 3 float (no doubles), y las
+      coords de textura tuplas de 2 flotantes. Los indices son 'unsigned int'
+   */
 
 
+   const int nv = (indices != nullptr)
+      ? indices->num_tuplas_ind
+      : num_vertices;
+
+   glBegin(tipo_primitiva);
+
+   for (GLuint i = 0; i < nv; i++) {
+      const GLuint index_vertex = indices->datos != nullptr
+         ? indices->datos[i]
+         : i;
+
+      if (colores != nullptr) {
+         glColor3fv ((const GLfloat *) colores->datos + 3*index_vertex);
+      }
+      if (normales != nullptr) {
+         glNormal3fv((const GLFloat *) normales->datos + 3*index_vertex);
+      }
+      if (coords_textura != nullptr) {
+         glTexCoord2f((const GLfloat *) coords_textura->datos + 2*index_vertex);
+      }
+
+      glVertex3fv((const GLfloat *) coordenadas->datos + 3*index_vertex);
+   }
+
+   glEnd();
    CError();
 }
 // -----------------------------------------------------------------------------
 
-// Visualizar en modo inmediato, con una única llamada a 'DrawArrays' (no indexado) 
+// Visualizar en modo inmediato, con una única llamada a 'DrawArrays' (no indexado)
 // o 'DrawElements' (indexado)
 
-void ArrayVertices::visualizarGL_MI_DAE( const GLenum tipo_primitiva ) 
+void ArrayVertices::visualizarGL_MI_DAE( const GLenum tipo_primitiva )
 {
    using namespace std ;
    //cout << __FUNCTION__ << ": inicio " << endl ;
@@ -386,7 +415,7 @@ void ArrayVertices::visualizarGL_MI_DAE( const GLenum tipo_primitiva )
    assert( coordenadas != nullptr );
    CError();
 
-   // COMPLETAR: práctica 1: visualizar array de vértices en modo inmediato usando las funciones 
+   // COMPLETAR: práctica 1: visualizar array de vértices en modo inmediato usando las funciones
    //  'glDrawArrays' (si no está indexado) o 'glDrawElements' (si está indexado)
    // * antes de visualizar es necesario activar las tablas no vacías (en modo inmediato)
    // * se debe activar el VAO pordefecto (VAO 0) al inicio
@@ -408,16 +437,16 @@ void ArrayVertices::deshabilitar_tablas()
 }
 // -----------------------------------------------------------------------------
 
-// Visualizar en modo diferido, con una única llamada a 'DrawArrays' (no indexado) 
+// Visualizar en modo diferido, con una única llamada a 'DrawArrays' (no indexado)
 // o 'DrawElements' (indexado), usando VBOs y un VAO
 
-void ArrayVertices::visualizarGL_MD_VAO( const GLenum tipo_primitiva ) 
+void ArrayVertices::visualizarGL_MD_VAO( const GLenum tipo_primitiva )
 {
    using namespace std ;
    //cout << __FUNCTION__ << " : inicio " << endl ;
    CError();
 
-   // COMPLETAR: práctica 1: visualizar array de vértices en modo diferido usando las funciones 
+   // COMPLETAR: práctica 1: visualizar array de vértices en modo diferido usando las funciones
    //  glDrawArrays (si no está indexado) o glDrawElements (si está indexado)
    // antes de visualizar es necesario crear el VAO (si no está creado ya)
 
@@ -425,5 +454,3 @@ void ArrayVertices::visualizarGL_MD_VAO( const GLenum tipo_primitiva )
    CError();
 }
 // -----------------------------------------------------------------------------
-   
-
