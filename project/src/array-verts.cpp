@@ -211,12 +211,23 @@ void DescrTabla::activar_md()
 {
    CError();
 
-   // COMPLETAR: práctica 1: activar la tabla en modo diferido
-   // 1. Crea el VBO si es necesario (la primera vez),
-   // 2. Activa (hace 'bind') el buffer en la GPU, después:
-   //     2.1. En el caso de los índices, no hace nada más, deja el buffer 'binded'
-   //     2.2. En el caso de los atributos: fija el puntero, hace 'unbind' del buffer, habilita uso de la tabla
-   // ......
+   if (nombre_vbo == 0) {
+      glGenBuffers(1, &nombre_vbo);          // Crear el nuevo nombre de VBO
+      glBindBuffer(tipo_tabla, nombre_vbo)   // Enlazar tabla con el nuevo VBO
+      glBufferData(tipo_tabla, tamano_en_bytes, datos, GL_STATIC_DRAW);    // Alojar en VRAM
+   }
+   else {
+      // VBO ya estaba creado; activarlo simplemente
+      glBindBuffer(tipo_tabla, nombre_vbo);
+   }
+
+   if (tipo_tabla == GL_ARRAY_BUFFER) {
+      // Si tratamos una tabla de atributos, especificar localización y formato; y habilitar su uso
+
+      fijarPuntero(0);
+      glBindBuffer(tipo_tabla, 0);
+      glEnableClientState(atributo);
+   }
 
    CError();
 }
@@ -469,7 +480,8 @@ void ArrayVertices::visualizarGL_MD_VAO( const GLenum tipo_primitiva )
    //cout << __FUNCTION__ << " : inicio " << endl ;
    CError();
 
-   // COMPLETAR: práctica 1: visualizar array de vértices en modo diferido usando las funciones
+
+   // TODO: práctica 1: visualizar array de vértices en modo diferido usando las funciones
    //  glDrawArrays (si no está indexado) o glDrawElements (si está indexado)
    // antes de visualizar es necesario crear el VAO (si no está creado ya)
 

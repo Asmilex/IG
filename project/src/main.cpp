@@ -67,7 +67,7 @@ void InicializaOpenGLCuadro()
       glClearColor( 0.2, 0.25, 0.3, 1.0 );
 
    // dibujar en modo 'suave' (antialiasing de lineas y puntos)
-   
+
    if ( cv.suavizar_aristas )
    {
       glEnable( GL_POINT_SMOOTH );
