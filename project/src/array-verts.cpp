@@ -480,11 +480,39 @@ void ArrayVertices::visualizarGL_MD_VAO( const GLenum tipo_primitiva )
    //cout << __FUNCTION__ << " : inicio " << endl ;
    CError();
 
+   if (nombre_vao == 0) {
+      // Crear VAO nuevo
+      glGenVertexArrays(1, nombre_vao);
+      glBindVertexArray(nombre_vao);
 
-   // TODO: práctica 1: visualizar array de vértices en modo diferido usando las funciones
-   //  glDrawArrays (si no está indexado) o glDrawElements (si está indexado)
-   // antes de visualizar es necesario crear el VAO (si no está creado ya)
+      coordenadas->activar_md();
 
+      if (colores != nullptr) {
+         colores->activar_md();
+      }
+      if (normales != nullptr) {
+         normales->activar_md();
+      }
+      if (coords_textura != nullptr) {
+         coords_textura->activar_md();
+      }
+      if (indices != nullptr) {
+         indices->activar_md();
+      }
+   }
+   else {
+      glBindVertexArray(nombre_vao);
+   }
+
+   if (indices != nullptr) {
+      glDrawElements(tipo_primitiva, num_indices, indices->valores, 0);
+   }
+   else {
+      glDrawArrays(tipo_primitiva, 0, num_vertices);
+   }
+
+   // Deshabilitar VAO para acabar
+   glBindVertexArray(0);
 
    CError();
 }
