@@ -212,8 +212,8 @@ void DescrTabla::activar_md()
    CError();
 
    if (nombre_vbo == 0) {
-      glGenBuffers(1, &nombre_vbo);          // Crear el nuevo nombre de VBO
-      glBindBuffer(tipo_tabla, nombre_vbo)   // Enlazar tabla con el nuevo VBO
+      glGenBuffers(1, &nombre_vbo);           // Crear el nuevo nombre de VBO
+      glBindBuffer(tipo_tabla, nombre_vbo);   // Enlazar tabla con el nuevo VBO
       glBufferData(tipo_tabla, tamano_en_bytes, datos, GL_STATIC_DRAW);    // Alojar en VRAM
    }
    else {
@@ -390,18 +390,18 @@ void ArrayVertices::visualizarGL_MI_BVE( const GLenum tipo_primitiva )
    glBegin(tipo_primitiva);
 
    for (GLuint i = 0; i < nv; i++) {
-      const GLuint index_vertex = indices->datos != nullptr
-         ? indices->datos[i]
+      const GLuint index_vertex = (indices->datos != nullptr)
+         ? *((GLuint *)indices->datos + i*sizeof(GLuint))
          : i;
 
       if (colores != nullptr) {
          glColor3fv ((const GLfloat *) colores->datos + 3*index_vertex);
       }
       if (normales != nullptr) {
-         glNormal3fv((const GLFloat *) normales->datos + 3*index_vertex);
+         glNormal3fv((const GLfloat *) normales->datos + 3*index_vertex);
       }
       if (coords_textura != nullptr) {
-         glTexCoord2f((const GLfloat *) coords_textura->datos + 2*index_vertex);
+         glTexCoord2fv((const GLfloat *) coords_textura->datos + 2*index_vertex);
       }
 
       glVertex3fv((const GLfloat *) coordenadas->datos + 3*index_vertex);
@@ -438,10 +438,10 @@ void ArrayVertices::visualizarGL_MI_DAE( const GLenum tipo_primitiva )
    coordenadas->activar_mi();
 
    if (colores != nullptr) {
-      colores->activar_mi;
+      colores->activar_mi();
    }
    if (normales != nullptr) {
-      normales->activar_mi;
+      normales->activar_mi();
    }
    if (coords_textura != nullptr) {
       coords_textura->activar_mi();
@@ -482,7 +482,7 @@ void ArrayVertices::visualizarGL_MD_VAO( const GLenum tipo_primitiva )
 
    if (nombre_vao == 0) {
       // Crear VAO nuevo
-      glGenVertexArrays(1, nombre_vao);
+      glGenVertexArrays(1, &nombre_vao);
       glBindVertexArray(nombre_vao);
 
       coordenadas->activar_md();
@@ -505,7 +505,7 @@ void ArrayVertices::visualizarGL_MD_VAO( const GLenum tipo_primitiva )
    }
 
    if (indices != nullptr) {
-      glDrawElements(tipo_primitiva, num_indices, indices->valores, 0);
+      glDrawElements(tipo_primitiva, num_indices, indices->tipo_valores, indices->datos);
    }
    else {
       glDrawArrays(tipo_primitiva, 0, num_vertices);
