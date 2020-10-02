@@ -8,18 +8,15 @@
 #ifndef IG_MALLAIND_HPP
 #define IG_MALLAIND_HPP
 
-#include <vector>          // usar std::vector
-
-#include "objeto3d.h"   // declaración de 'Objeto3D'
-#include "array-verts.h" // clase 'ArrayVert'
+#include <vector>         // usar std::vector
+#include "objeto3d.h"     // declaración de 'Objeto3D'
+#include "array-verts.h"  // clase 'ArrayVert'
 
 // ---------------------------------------------------------------------
 // clase para objetos gráficos genéricos
 
 class MallaInd : public Objeto3D
 {
-   
-
    protected:
       // COMPLETAR: incluir aquí las variables y métodos privados que sean
       // necesarios para una malla indexada
@@ -33,10 +30,10 @@ class MallaInd : public Objeto3D
       std::vector<Tupla3f> nor_tri ;  // normales de triangulos
       std::vector<Tupla2f> cc_tt_ver ; // coordenadas de textura de los vértices
 
-     
+
       // array de vértices con información de tablas para visualizar
       // (se crea bajo demanda: la primera vez que se llama a 'visualizarGL')
-      ArrayVertices * array_verts = nullptr ; 
+      ArrayVertices * array_verts = nullptr ;
 
 
 
@@ -57,13 +54,9 @@ class MallaInd : public Objeto3D
 
       // visualizar el objeto con OpenGL
       virtual void visualizarGL( ContextoVis & cv ) ;
-
-
-
-
-
-
 } ;
+
+
 // ---------------------------------------------------------------------
 // Clase para mallas obtenidas de un archivo 'ply'
 // es un tipo de malla indexada que define un nuevo constructor

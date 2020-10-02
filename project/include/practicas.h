@@ -108,11 +108,11 @@ class ContextoVis
    // numero de columnas (tam_x) y filas (tam_y) del viewport actual
    int ventana_tam_x = -1,
        ventana_tam_y = -1 ;
-   
-   // suavizar aristas (y puntos) si/no 
+
+   // suavizar aristas (y puntos) si/no
    bool suavizar_aristas = false ;
 
-   
+
 
 
 

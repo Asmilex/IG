@@ -87,7 +87,7 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    // COMPLETAR: práctica 1: si el puntero 'array_verts' es nulo, crear el objeto ArrayVerts
    //   * en el constructor se dan los datos de la tabla de coordenadas de vértices (tabla 'vertices')
    //   * después hay que invocar a 'fijarIndices', usando el formato y datos de la tabla de triángulos ('triangulos')
-   //   * si las tablas 'col_ver', 'cc_tt_ver' o 'nor_ver' no están vacías, hay que invocar los métodos
+it    //   * si las tablas 'col_ver', 'cc_tt_ver' o 'nor_ver' no están vacías, hay que invocar los métodos
    //     'fijarColores', 'fijarCoordText' y 'fijarNormales', como corresponda.
 
    if (array_verts == nullptr) {
