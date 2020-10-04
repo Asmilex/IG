@@ -87,13 +87,13 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    // COMPLETAR: práctica 1: si el puntero 'array_verts' es nulo, crear el objeto ArrayVerts
    //   * en el constructor se dan los datos de la tabla de coordenadas de vértices (tabla 'vertices')
    //   * después hay que invocar a 'fijarIndices', usando el formato y datos de la tabla de triángulos ('triangulos')
-it    //   * si las tablas 'col_ver', 'cc_tt_ver' o 'nor_ver' no están vacías, hay que invocar los métodos
+   //   * si las tablas 'col_ver', 'cc_tt_ver' o 'nor_ver' no están vacías, hay que invocar los métodos
    //     'fijarColores', 'fijarCoordText' y 'fijarNormales', como corresponda.
 
    if (array_verts == nullptr) {
-      // FIXME: convertir a formato de tipo tabla (Descriptor de tabla de mier)
-      array_verts = new ArrayVertices(GL_FLOAT, 3, vertices.size(), vertices);
-      array_verts->fijarIndices(GL_UNSIGNED_INT, triangulos.size(), triangulos);
+      // FIXME quizás no funcione? Probar con .data() como sugiere Antonio
+      array_verts = new ArrayVertices(GL_FLOAT, 3, vertices.size(), vertices.data());
+      array_verts->fijarIndices(GL_UNSIGNED_INT, triangulos.size(), triangulos.data());
       //                                                 ^^^^^^^^^^^^^^^^
       //                             Asumo que p_num_inds == número de tuplas de índices
    }
