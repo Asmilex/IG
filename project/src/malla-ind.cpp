@@ -93,9 +93,17 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    if (array_verts == nullptr) {
       // FIXME quizás no funcione? Probar con .data() como sugiere Antonio
       array_verts = new ArrayVertices(GL_FLOAT, 3, vertices.size(), vertices.data());
-      array_verts->fijarIndices(GL_UNSIGNED_INT, triangulos.size(), triangulos.data());
-      //                                                 ^^^^^^^^^^^^^^^^
-      //                             Asumo que p_num_inds == número de tuplas de índices
+      array_verts->fijarIndices(GL_UNSIGNED_INT, 3*triangulos.size(), triangulos.data());
+
+      if (!col_ver.empty()) {
+         array_verts->fijarColores(GL_FLOAT, 3, col_ver.data());
+      }
+      if (!cc_tt_ver.empty()) {
+         array_verts->fijarCoordText(GL_FLOAT, 2, cc_tt_ver.data());
+      }
+      if (!nor_ver.empty()) {
+         array_verts->fijarNormales(GL_FLOAT, nor_ver.data());
+      }
    }
 
 
@@ -106,6 +114,15 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    // (en cualquier caso hay que pasar como parámetro el tipo de primitiva adecuada a una malla de triángulos).
    // .....
 
+   if (cv.modo_envio == ModosEnvio::inmediato_begin_end) {
+      array_verts->visualizarGL_MI_BVE(GL_TRIANGLES);
+   }
+   else if (cv.modo_envio == ModosEnvio::inmediato_drawelements) {
+      array_verts->visualizarGL_MI_DAE(GL_TRIANGLES);
+   }
+   else if (cv.modo_envio == ModosEnvio::diferido_vao) {
+      array_verts->visualizarGL_MD_VAO(GL_TRIANGLES);
+   }
 
    // restaurar el color previamente fijado
    glColor4fv( color_previo );
