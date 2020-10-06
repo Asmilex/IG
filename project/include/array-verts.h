@@ -50,7 +50,7 @@ class DescrTabla
    GLenum atributo = 0 ;
    // Indica cual es el atributo de vértice almacenado en la tabla (solo si tipo_tabla es 'GL_ARRAY_BUFFER').
    // Debe valer una de estas constantes:
-   //    GL_VERTEX_ARRAY          -  coordenadas (posiciones)
+   //    GL_VERTEX_ARRAY          - coordenadas (posiciones)
    //    GL_TEXTURE_COORD_ARRAY   - coordenadas de textura
    //    GL_COLOR_ARRAY           - colores de vértices
    //    GL_NORMAL_ARRAY          - normales

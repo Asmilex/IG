@@ -1,135 +1,135 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\animacion.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\animacion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\array-verts.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\array-verts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\camara.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\camara.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\escena.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\escena.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\grafo-escena.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\grafo-escena.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\main.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\malla-ind.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\malla-ind.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\malla-revol.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\malla-revol.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\materiales-luces.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\materiales-luces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\objeto3d.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\objeto3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\seleccion.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\project\src\seleccion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\recursos\src\cauce.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\src\cauce.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\recursos\src\fbo.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\src\fbo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\recursos\src\ig-aux.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\src\ig-aux.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\recursos\src\lector-jpg.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\src\lector-jpg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\recursos\src\lector-ply.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\src\lector-ply.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Andre\Repositorios\IG\recursos\src\matrices-tr.cpp">
+    <ClCompile Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\src\matrices-tr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\animacion.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\animacion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\array-verts.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\array-verts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\camara.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\camara.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\escena.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\escena.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\exp4.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\exp4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\grafo-escena.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\grafo-escena.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\malla-ind.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\malla-ind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\malla-revol.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\malla-revol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\materiales-luces.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\materiales-luces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\objeto3d.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\objeto3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\practicas.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\practicas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\seleccion.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\project\include\seleccion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\cauce.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\cauce.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\fbo.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\fbo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\ig-aux.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\ig-aux.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\lector-jpg.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\lector-jpg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\lector-ply.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\lector-ply.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\matrices-tr.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\matrices-tr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\matrizg.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\matrizg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\matrizg_impl.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\matrizg_impl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\tuplasg.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\tuplasg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Andre\Repositorios\IG\recursos\include\tuplasg_impl.h">
+    <ClInclude Include="C:\Users\Andre\Documentos\Repositorios\IG\recursos\include\tuplasg_impl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\Andre\Repositorios\IG\project\cmake-win\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Andre\Documentos\Repositorios\IG\project\cmake-win\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{D43ABF5E-BA5D-3944-A26D-739B9F0FCCA6}</UniqueIdentifier>
+      <UniqueIdentifier>{B0FC7FBE-BF23-3BD9-AF03-208EB014AB22}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{9311E275-2ABA-3CE3-84B1-845D996E0FA6}</UniqueIdentifier>
+      <UniqueIdentifier>{434A8264-C9F7-3B1D-9D55-842CAB24D544}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

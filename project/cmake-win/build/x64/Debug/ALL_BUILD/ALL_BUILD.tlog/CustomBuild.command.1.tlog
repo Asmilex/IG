@@ -1,6 +1,6 @@
-^C:\USERS\ANDRE\REPOSITORIOS\IG\PROJECT\CMAKE-WIN\CMAKELISTS.TXT
+^C:\USERS\ANDRE\DOCUMENTOS\REPOSITORIOS\IG\PROJECT\CMAKE-WIN\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Andre/Repositorios/IG/project/cmake-win -BC:/Users/Andre/Repositorios/IG/project/cmake-win/build --check-stamp-file C:/Users/Andre/Repositorios/IG/project/cmake-win/build/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Andre/Documentos/Repositorios/IG/project/cmake-win -BC:/Users/Andre/Documentos/Repositorios/IG/project/cmake-win/build --check-stamp-file C:/Users/Andre/Documentos/Repositorios/IG/project/cmake-win/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
