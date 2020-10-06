@@ -91,7 +91,6 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    //     'fijarColores', 'fijarCoordText' y 'fijarNormales', como corresponda.
 
    if (array_verts == nullptr) {
-      // FIXME quizás no funcione? Probar con .data() como sugiere Antonio
       array_verts = new ArrayVertices(GL_FLOAT, 3, vertices.size(), vertices.data());
       array_verts->fijarIndices(GL_UNSIGNED_INT, 3*triangulos.size(), triangulos.data());
 
@@ -127,10 +126,6 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    // restaurar el color previamente fijado
    glColor4fv( color_previo );
 }
-
-
-
-
 
 
 // *****************************************************************************

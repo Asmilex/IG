@@ -185,19 +185,17 @@ void DescrTabla::fijarPuntero( const GLvoid * ptr_offset )
    // .....
 
    if (atributo == GL_VERTEX_ARRAY) {
-      glVertexPointer(num_vals_tupla, tipo_valores, num_tuplas_ind, ptr_offset);
-      // FIXME                            stride   ¿^^^^^^^^^^^^^^^^?
+      glVertexPointer(num_vals_tupla, tipo_valores, 0, ptr_offset);
    }
    if (atributo == GL_TEXTURE_COORD_ARRAY) {
-      glTexCoordPointer(num_vals_tupla, tipo_valores, num_tuplas_ind, ptr_offset);
+      glTexCoordPointer(num_vals_tupla, tipo_valores, 0, ptr_offset);
    };
    if (atributo == GL_COLOR_ARRAY) {
-      glColorPointer(num_vals_tupla, tipo_valores, num_tuplas_ind, ptr_offset);
+      glColorPointer(num_vals_tupla, tipo_valores, 0, ptr_offset);
    }
    if (atributo == GL_NORMAL_ARRAY) {
-      glNormalPointer(tipo_valores, num_tuplas_ind, ptr_offset);
+      glNormalPointer(tipo_valores, 0, ptr_offset);
    }
-
 }
 
 // -----------------------------------------------------------------------------

@@ -95,12 +95,7 @@ void Escena::visualizarGL( ContextoVis & cv )
    objeto->visualizarGL(cv);
 
 
-
-
-
    // si hay un FBO, dibujarlo (opcional...)
-
-
 }
 
 
@@ -172,7 +167,10 @@ Escena1::Escena1()
    // Añadir objetos al vector 'objetos', con:
    //     objetos.push_back( new .... )
    // .........
-   
+
+   //objetos.push_back( new Tetraedro() );
+   //objetos.push_back( new CuboColores() );
+
 
 
    cout << "hecho." << endl << flush ;
