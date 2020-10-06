@@ -417,7 +417,7 @@ void ArrayVertices::visualizarGL_MI_BVE( const GLenum tipo_primitiva )
    // FIXME
    for (GLuint i = 0; i < nv; i++) {
       GLuint index_vertex = (indices->datos != nullptr)
-         ? *((GLuint *)(indices->datos) + i*sizeof(GLuint))
+         ? *(((GLuint *) indices->datos) + i)
          : i;
       if (colores != nullptr) {
          glColor3fv ((const GLfloat *) colores->datos + 3*index_vertex);
