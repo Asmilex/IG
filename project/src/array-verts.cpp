@@ -416,7 +416,7 @@ void ArrayVertices::visualizarGL_MI_BVE( const GLenum tipo_primitiva )
 
    for (GLuint i = 0; i < nv; i++) {
       const GLuint index_vertex = (indices->datos != nullptr)
-         ? *((GLuint *)indices->datos + i*sizeof(GLuint))
+         ? *(GLuint *)(indices->datos) + i*sizeof(GLuint)
          : i;
 
       if (colores != nullptr) {
