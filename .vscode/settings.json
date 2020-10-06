@@ -1,5 +1,5 @@
 {
-    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    "C_Cpp.intelliSenseEngine": "Default",
     "files.associations": {
         "initializer_list": "cpp",
         "type_traits": "cpp",
@@ -8,4 +8,5 @@
         "xtree": "cpp",
         "xutility": "cpp"
     },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
 }

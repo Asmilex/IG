@@ -3,20 +3,18 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/project/include",
-                "${workspaceFolder}/recursos/include",
-                "${workspaceFolder}/recursos/packages-win/nupengl.core.0.1.0.1/build/native/include/GLFW/",
-                "${workspaceFolder}/recursos/packages-win/nupengl.core.0.1.0.1/build/native/include/GL/",
-                "${workspaceFolder}/recursos/packages-win/libjpeg.9.2.0.1/build/native/include"
+                "${workspaceFolder}/**",
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "WIN32",
+                "WINDOWS"
             ],
-            "windowsSdkVersion": "10.0.17763.0"
+            "windowsSdkVersion": "10.0.17763.0",
+            "intelliSenseMode": "msvc-x64"
         }
     ],
     "version": 4
-
 }
