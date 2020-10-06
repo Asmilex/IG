@@ -64,13 +64,13 @@ void Escena::visualizarGL( ContextoVis & cv )
       cauce->fijarModoSombrPlano(true);
    }
    if (cv.modo_visu == ModosVisu::puntos) {
-      glPolygonMode(GL_FRONT, GL_POINT);
+      glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
    }
    else if (cv.modo_visu == ModosVisu::lineas) {
-      glPolygonMode(GL_FRONT, GL_LINE);
+      glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
    }
    else if (cv.modo_visu == ModosVisu::relleno) {
-      glPolygonMode(GL_FRONT, GL_FILL);
+      glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
    }
 
 
@@ -168,9 +168,10 @@ Escena1::Escena1()
    //     objetos.push_back( new .... )
    // .........
 
-   //objetos.push_back( new Tetraedro() );
-   //objetos.push_back( new CuboColores() );
-
+   for (int i = 0; i < 100; i++) {
+      objetos.push_back( new Tetraedro() );
+      objetos.push_back( new CuboColores() );
+   }
 
 
    cout << "hecho." << endl << flush ;
