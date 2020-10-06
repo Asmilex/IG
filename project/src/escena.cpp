@@ -60,6 +60,18 @@ void Escena::visualizarGL( ContextoVis & cv )
    // COMPLETAR: Práctica 1: Configurar el cauce en función de:
    //    cv.sombr_plano (true/false)              --> usar fijarModoSombrPlano (método del 'cauce')
    //    cv.modo_visu   (puntos,lineas o relleno) --> usar glPolygonMode
+   if (cv.sombr_plano) {
+      cauce->fijarModoSombrPlano(true);
+   }
+   if (cv.modo_visu == ModosVisu::puntos) {
+      glPolygonMode(GL_FRONT, GL_POINT);
+   }
+   else if (cv.modo_visu == ModosVisu::lineas) {
+      glPolygonMode(GL_FRONT, GL_LINE);
+   }
+   else if (cv.modo_visu == ModosVisu::relleno) {
+      glPolygonMode(GL_FRONT, GL_FILL);
+   }
 
 
    if ( cv.iluminacion )
@@ -80,7 +92,7 @@ void Escena::visualizarGL( ContextoVis & cv )
    Objeto3D * objeto = objetos[ind_objeto_actual] ; assert( objeto != nullptr );
 
    // COMPLETAR: Práctica 1: visualizar el objeto actual ('objeto')
-
+   objeto->visualizarGL(cv);
 
 
 
@@ -160,6 +172,7 @@ Escena1::Escena1()
    // Añadir objetos al vector 'objetos', con:
    //     objetos.push_back( new .... )
    // .........
+   
 
 
    cout << "hecho." << endl << flush ;
@@ -194,6 +207,3 @@ Escena1::Escena1()
 // Añadir la implementación del constructor de la clase Escena5 para construir
 // los objetos que se indican en los guiones de las práctica 5
 // .......
-
-
-
