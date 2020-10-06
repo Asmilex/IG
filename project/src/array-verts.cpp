@@ -180,9 +180,23 @@ void DescrTabla::fijarPuntero( const GLvoid * ptr_offset )
    assert( tipo_tabla == GL_ARRAY_BUFFER );
    // COMPLETAR: práctica 1: indicar localización y formato de tabla (hay que invocar
    // a 'glVertexPointer' o 'glTexCoordPointer' o 'glColorPointer' o 'glNormalPointer',
-   // según que atributo se codifica en la tabla)
+   // según qué atributo se codifica en la tabla)
    //
    // .....
+
+   if (atributo == GL_VERTEX_ARRAY) {
+      glVertexPointer(num_vals_tupla, tipo_valores, num_tuplas_ind, ptr_offset);
+      // FIXME                            stride   ¿^^^^^^^^^^^^^^^^?
+   }
+   if (atributo == GL_TEXTURE_COORD_ARRAY) {
+      glTexCoordPointer(num_vals_tupla, tipo_valores, num_tuplas_ind, ptr_offset);
+   };
+   if (atributo == GL_COLOR_ARRAY) {
+      glColorPointer(num_vals_tupla, tipo_valores, num_tuplas_ind, ptr_offset);
+   }
+   if (atributo == GL_NORMAL_ARRAY) {
+      glNormalPointer(tipo_valores, num_tuplas_ind, ptr_offset);
+   }
 
 }
 
@@ -199,6 +213,11 @@ void DescrTabla::activar_mi()
    }
    CError();
 
+   // COMPLETAR: práctica 1: activar la tabla en modo inmediato
+   // (hay que invocar a 'fijarPuntero' y luego a 'glEnableClientState')
+   //
+   // .....
+
    fijarPuntero(datos);             // Especifica localización y formato
    glEnableClientState(atributo);   // Habilita el uso de la tabla
 
@@ -210,6 +229,14 @@ void DescrTabla::activar_mi()
 void DescrTabla::activar_md()
 {
    CError();
+
+   // COMPLETAR: práctica 1: activar la tabla en modo diferido
+   // 1. Crea el VBO si es necesario (la primera vez),
+   // 2. Activa (hace 'bind') el buffer en la GPU, después:
+   //     2.1. En el caso de los índices, no hace nada más, deja el buffer 'binded'
+   //     2.2. En el caso de los atributos: fija el puntero, hace 'unbind' del buffer, habilita uso de la tabla
+   // ......
+
 
    if (nombre_vbo == 0) {
       glGenBuffers(1, &nombre_vbo);           // Crear el nuevo nombre de VBO
@@ -423,14 +450,12 @@ void ArrayVertices::visualizarGL_MI_DAE( const GLenum tipo_primitiva )
    assert( coordenadas != nullptr );
    CError();
 
-   /*
-      Tareas a realizar:
-         1. Activar VAO por defecto
-         2. Activar tablas no vacías (en modo inmediato)
-         3. Deshabilitar todas las tablas al inicio y al final
-         4. Dibujarlo según esté indexada o no.
-
-   */
+   // COMPLETAR: práctica 1: visualizar array de vértices en modo inmediato usando las funciones
+   //  'glDrawArrays' (si no está indexado) o 'glDrawElements' (si está indexado)
+   // * antes de visualizar es necesario activar las tablas no vacías (en modo inmediato)
+   // * se debe activar el VAO pordefecto (VAO 0) al inicio
+   // * se deben de deshabilitar todas las tablas, al inicio y al final.
+   // ...........
 
    glBindVertexArray(0);
    deshabilitar_tablas();
@@ -480,6 +505,10 @@ void ArrayVertices::visualizarGL_MD_VAO( const GLenum tipo_primitiva )
    //cout << __FUNCTION__ << " : inicio " << endl ;
    CError();
 
+   // COMPLETAR: práctica 1: visualizar array de vértices en modo diferido usando las funciones
+   //  glDrawArrays (si no está indexado) o glDrawElements (si está indexado)
+   // antes de visualizar es necesario crear el VAO (si no está creado ya)
+
    if (nombre_vao == 0) {
       // Crear VAO nuevo
       glGenVertexArrays(1, &nombre_vao);
@@ -505,7 +534,7 @@ void ArrayVertices::visualizarGL_MD_VAO( const GLenum tipo_primitiva )
    }
 
    if (indices != nullptr) {
-      glDrawElements(tipo_primitiva, num_indices, indices->tipo_valores, indices->datos);
+      glDrawElements(tipo_primitiva, num_indices, indices->tipo_valores, 0);
    }
    else {
       glDrawArrays(tipo_primitiva, 0, num_vertices);
