@@ -173,7 +173,7 @@ Escena1::Escena1()
       objetos.push_back( new CuboColores() );
    }
 
-
+   // Comentario basura.
    cout << "hecho." << endl << flush ;
 }
 

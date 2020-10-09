@@ -414,7 +414,6 @@ void ArrayVertices::visualizarGL_MI_BVE( const GLenum tipo_primitiva )
 
    glBegin(tipo_primitiva);
 
-   // FIXME
    for (GLuint i = 0; i < nv; i++) {
       GLuint index_vertex = (indices->datos != nullptr)
          ? *(((GLuint *) indices->datos) + i)
