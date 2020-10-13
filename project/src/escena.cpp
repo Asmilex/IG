@@ -188,13 +188,15 @@ Escena2::Escena2()
    cout << "Creando objetos de escena 2 .... " << flush;
    string raiz = "../recursos/plys/";
 
+   int numero_repeticiones = 40;
    objetos.push_back( new MallaPLY(raiz + "ant.ply") );
    objetos.push_back( new MallaPLY(raiz + "beethoven.ply") );
    objetos.push_back( new MallaPLY(raiz + "big_dodge.ply") );
-   //objetos.push_back( new MallaPLY(raiz + "lata-pcue.ply") );
-   //objetos.push_back( new MallaPLY(raiz + "lata-pinf.ply") );
-   //objetos.push_back( new MallaPLY(raiz + "lata-psup.ply") );
-   //objetos.push_back( new MallaPLY(raiz + "peon.ply") );
+
+   objetos.push_back( new MallaRevolPLY(raiz + "peon.ply", numero_repeticiones) );
+   objetos.push_back( new MallaRevolPLY(raiz + "lata-pcue.ply", numero_repeticiones) );
+   objetos.push_back( new MallaRevolPLY(raiz + "lata-pinf.ply", numero_repeticiones) );
+   objetos.push_back( new MallaRevolPLY(raiz + "lata-psup.ply", numero_repeticiones) );
 
    cout << "hecho." << endl << flush ;
 }

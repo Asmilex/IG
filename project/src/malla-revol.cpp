@@ -25,20 +25,27 @@ void MallaRevol::inicializar (   const std::vector<Tupla3f> & perfil,      // ta
 
 {
    // COMPLETAR: Práctica 2: completar: creación de la malla....
+   // FIXME falla la colocación de los vértices. Seguramente sea la matriz rotación
    for (int i = 0; i < num_copias; i++) {
       for (int j = 0; j < perfil.size(); j++) {
          //                               Rotamos sobre el eje Y
          //                  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-         vertices.push_back( MAT_Rotacion(2*M_PI*i/(num_copias - 1), {0.0, 1.0, 0.0} ) * vertices[j] );
+         double angulo_grados = ((2*M_PI*i)/(num_copias - 1))*(180/M_PI);
+         vertices.push_back( MAT_Rotacion(angulo_grados, {0.0, 1.0, 0.0} ) * perfil[j] );
+
       }
    }
 
-   int k = 0;
+   size_t k = 0;
    for (int i = 0; i < num_copias - 1; i++) {
       for (int j = 0; j < perfil.size() - 1; j++) {
          k = i*perfil.size() + j;
-         triangulos.push_back( {k, k + perfil.size(), k + perfil.size() + 1} );
-         triangulos.push_back( {k, k + perfil.size() + 1, k + 1} );
+
+         Tupla3i nueva_tupla_1 = Tupla3i(k, k + perfil.size(),     k + perfil.size() + 1);
+         Tupla3i nueva_tupla_2 = Tupla3i(k, k + perfil.size() + 1, k + 1);
+
+         triangulos.push_back( nueva_tupla_1 );
+         triangulos.push_back( nueva_tupla_2 );
       }
    }
 }
@@ -56,8 +63,7 @@ MallaRevolPLY::MallaRevolPLY
    // COMPLETAR: práctica 2: crear la malla de revolución
    // Leer los vértice del perfil desde un PLY, después llamar a 'inicializar'
    // ...........................
-   LeerVerticesPLY(nombre_arch, vertices);
-   inicializar(vertices, nperfiles);
-
-
+   vector<Tupla3f> perfil;
+   LeerVerticesPLY(nombre_arch, perfil);
+   inicializar(perfil, nperfiles);
 }
