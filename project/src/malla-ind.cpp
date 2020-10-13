@@ -16,13 +16,14 @@
 // *****************************************************************************
 // funciones auxiliares
 
-double RNG (double minimo, double maximo) {
+float RNG (double minimo, double maximo) {
    std::random_device rd;
    std::mt19937 gen(rd());
    static std::uniform_real_distribution<double> distribucion(minimo,maximo); // distribution in range [1, 6]
 
-    return distribucion(gen);
+   return distribucion(gen);
 }
+
 
 // *****************************************************************************
 // métodos de la clase MallaInd.
@@ -149,12 +150,11 @@ MallaPLY::MallaPLY( const std::string & nombre_arch )
 
    // COMPLETAR: práctica 2: leer archivo PLY e inicializar la malla
    // ..........................
+   LeerPLY(nombre_arch, vertices, triangulos);
 
 
    // COMPLETAR: práctica 4: invocar  a 'calcularNormales' para el cálculo de normales
    // .................
-
-
 
 }
 
@@ -197,20 +197,29 @@ Cubo::Cubo()
 
    Tetraedro::Tetraedro() : MallaInd("Tetraedro aleatorio")
    {
-      for (int i = 0; i < 4; i++) {
-            vertices.push_back({(float)RNG(-1, 1), (float)RNG(-1, 1), (float)RNG(-1, 1)});
-      }
+      vertices = {
+         { 0,            RNG(0.1, 2),  0          },
+         {-RNG(0.1, 2), -RNG(0.1, 2),  RNG(0.1, 2)},
+         { RNG(0.1, 2), -RNG(0.1, 2),  RNG(0.1, 2)},
+         { 0,           -RNG(0.1, 2), -RNG(0.1, 2)}
+      };
+
 
       triangulos = {
-         {0, 1, 2}, {1, 2, 3}, {0, 2, 3}, {0, 1, 3}
+         {0, 1, 2},  // Frontal
+         {3, 1, 0},  // Lateral izquierda
+         {3, 0, 2},  // Lateral derecha
+         {1, 3, 2}   // Parte de abajo
       };
+
+      ponerColor({ RNG(0, 1), RNG(0, 1), RNG(0, 1) });
    }
 
 //
 // ────────────────────────────────────────────────────────────── CUBOCOLORES ─────
 //
 
-   CuboColores::CuboColores() : MallaInd("Cubo de colores aleatorio")
+   CuboColores::CuboColores() : MallaInd("Cubo de colores y tamaño aleatorio")
    {
       float size = RNG(0, 1);
 
@@ -239,6 +248,6 @@ Cubo::Cubo()
       } ;
 
       for (int i = 0; i < vertices.size(); i++) {
-         col_ver.push_back(   { (float)RNG(0, 1), (float)RNG(0, 1), (float)RNG(0, 1) } );
+         col_ver.push_back(   { RNG(0, 1), RNG(0, 1), RNG(0, 1) } );
       }
    }

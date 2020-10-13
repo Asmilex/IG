@@ -1,6 +1,6 @@
-^C:\USERS\ANDRE\DOCUMENTOS\REPOSITORIOS\IG\PROJECT\CMAKE-WIN\BUILD\CMAKEFILES\81B9E2475752ED607FAA42E294474705\GENERATE.STAMP.RULE
+^C:\USERS\ANDRE\REPOSITORIOS\IG\PROJECT\CMAKE-WIN\BUILD\CMAKEFILES\AB6824DEDE10E988C1544427926D463E\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Andre/Documentos/Repositorios/IG/project/cmake-win -BC:/Users/Andre/Documentos/Repositorios/IG/project/cmake-win/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Andre/Documentos/Repositorios/IG/project/cmake-win/build/pracs_ig_exe.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Andre/Repositorios/IG/project/cmake-win -BC:/Users/Andre/Repositorios/IG/project/cmake-win/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Andre/Repositorios/IG/project/cmake-win/build/pracs_ig_exe.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
