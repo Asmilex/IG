@@ -466,6 +466,8 @@ void Inicializar( int argc, char *argv[] )
    // 'Escena3', etc..
    // ......
 
+   escenas.push_back( new Escena2() );
+
 
 }
 

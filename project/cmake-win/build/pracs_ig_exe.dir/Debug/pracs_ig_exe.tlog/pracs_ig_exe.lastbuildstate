@@ -1,2 +1,2 @@
-#TargetFrameworkVersion=v4.0:PlatformToolSet=v142:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native64Bit:WindowsTargetPlatformVersion=10.0.18362.0
-Debug|x64|C:\Users\Andre\Documentos\Repositorios\IG\project\cmake-win\build\|
+PlatformToolSet=v142:VCToolArchitecture=Native64Bit:VCToolsVersion=14.27.29110:TargetPlatformVersion=10.0.18362.0:
+Debug|x64|C:\Users\Andre\Repositorios\IG\project\cmake-win\build\|

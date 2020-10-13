@@ -168,12 +168,11 @@ Escena1::Escena1()
    //     objetos.push_back( new .... )
    // .........
 
-   for (int i = 0; i < 100; i++) {
+   for (int i = 0; i < 2; i++) {
       objetos.push_back( new Tetraedro() );
       objetos.push_back( new CuboColores() );
    }
 
-   // Comentario basura.
    cout << "hecho." << endl << flush ;
 }
 
@@ -182,6 +181,23 @@ Escena1::Escena1()
 // Añadir la implementación del constructor de la clase Escena2 para construir
 // los objetos que se indican en los guiones de las práctica 2
 // .......
+
+Escena2::Escena2()
+{
+   using namespace std ;
+   cout << "Creando objetos de escena 2 .... " << flush;
+   string raiz = "../recursos/plys/";
+
+   objetos.push_back( new MallaPLY(raiz + "ant.ply") );
+   objetos.push_back( new MallaPLY(raiz + "beethoven.ply") );
+   objetos.push_back( new MallaPLY(raiz + "big_dodge.ply") );
+   //objetos.push_back( new MallaPLY(raiz + "lata-pcue.ply") );
+   //objetos.push_back( new MallaPLY(raiz + "lata-pinf.ply") );
+   //objetos.push_back( new MallaPLY(raiz + "lata-psup.ply") );
+   //objetos.push_back( new MallaPLY(raiz + "peon.ply") );
+
+   cout << "hecho." << endl << flush ;
+}
 
 
 
