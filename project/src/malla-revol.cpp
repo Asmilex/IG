@@ -25,7 +25,7 @@ void MallaRevol::inicializar (   const std::vector<Tupla3f> & perfil,      // ta
 
 {
    // COMPLETAR: Práctica 2: completar: creación de la malla....
-   // FIXME falla la colocación de los vértices. Seguramente sea la matriz rotación
+
    for (int i = 0; i < num_copias; i++) {
       for (int j = 0; j < perfil.size(); j++) {
          //                               Rotamos sobre el eje Y
@@ -65,5 +65,84 @@ MallaRevolPLY::MallaRevolPLY
    // ...........................
    vector<Tupla3f> perfil;
    LeerVerticesPLY(nombre_arch, perfil);
+   inicializar(perfil, nperfiles);
+}
+
+
+//
+// ─────────────────────────────────────────────────────────────── PRACTICA 2 ─────
+//
+
+Cilindro::Cilindro (const int num_verts_per, const unsigned nperfiles) {
+   if (num_verts_per < 4) {
+      cout << "Cilindro::Cilindro: se necesitan al menos 4 vértices para generar un cilindro";
+   }
+
+   string nombre = "Cilindro de altura " + to_string(altura) + " y radio " + to_string(radio) + "con "
+                     + to_string(num_verts_per) + " vértices y " + to_string(nperfiles) + "perfiles";
+   ponerNombre(nombre);
+
+
+   vector<Tupla3f> perfil = {
+      {0,     0,      0},     // Vértice de la base
+   };
+
+   // Interpolar desde el extremo de la base hasta el extremo superior
+   // Extremo inf + i/(nvp-3) * altura
+   for (int i = 0; i < num_verts_per - 2; i++) {
+      perfil.push_back(
+         {radio, ((float)i/(float)(num_verts_per - 3)) * altura, 0}
+      );
+   }
+
+   perfil.push_back({0, altura, 0});      // Vértice superior de la base)
+
+   inicializar(perfil, nperfiles);
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+
+Cono::Cono (const int num_verts_per, const unsigned nperfiles) {
+   if (num_verts_per < 3) {
+      cout << "Se necesitan al menos 3 vértices para generar un cono";
+   }
+
+   string nombre = "Cono de altura " + to_string(altura) + " y radio " + to_string(radio) + "con "
+                     + to_string(num_verts_per) + " vértices y " + to_string(nperfiles) + "perfiles";
+   ponerNombre(nombre);
+
+   vector<Tupla3f> perfil = {
+      {0, 0, 0}
+   };
+
+   for (int i = 0; i < num_verts_per - 1; i++) {
+      perfil.push_back(
+         {radio - ((float)i/(float)(num_verts_per-2)) * radio, 0 + ((float)i/(float)(num_verts_per-2)) * altura, 0}
+      );
+   }
+
+   perfil.push_back({0, altura, 0});
+
+   inicializar(perfil, nperfiles);
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+
+Esfera::Esfera (const int num_verts_per, const unsigned nperfiles) {
+   string nombre = "Esfera de radio " + to_string(radio) + "con "
+                  + to_string(num_verts_per) + " vértices y " + to_string(nperfiles) + "perfiles";
+
+   ponerNombre(nombre);
+
+   vector<Tupla3f> perfil = {
+      {0, -radio, 0}
+   };
+
+   for (int i = 1; i < num_verts_per; i++) {
+      perfil.push_back(
+         MAT_Rotacion((180 * i)/(num_verts_per - 1), {0, 0, radio}) * perfil[0]
+      );
+   }
+
    inicializar(perfil, nperfiles);
 }

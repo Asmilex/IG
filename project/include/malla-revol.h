@@ -44,5 +44,39 @@ class MallaRevolPLY : public MallaRevol
 } ;
 
 
+// ────────────────────────────────────────────────────────────────────────────────
 
+class Cilindro : public MallaRevol
+{
+   private:
+   float radio  = 1;
+   float altura = 3;
+
+
+   public:
+   Cilindro (const int num_verts_per, const unsigned nperfiles);
+};
+
+// ────────────────────────────────────────────────────────────────────────────────
+
+class Cono : public MallaRevol
+{
+   private:
+   float radio  = 1;
+   float altura = 3;
+
+   public:
+   Cono (const int num_verts_per, const unsigned nperfiles);
+};
+
+// ────────────────────────────────────────────────────────────────────────────────
+
+class Esfera : public MallaRevol
+{
+   private:
+   float radio = 2;
+
+   public:
+   Esfera (const int num_verts_per, const unsigned nperfiles);
+};
 #endif

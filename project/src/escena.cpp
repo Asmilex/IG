@@ -189,14 +189,18 @@ Escena2::Escena2()
    string raiz = "../recursos/plys/";
 
    int numero_repeticiones = 40;
-   objetos.push_back( new MallaPLY(raiz + "ant.ply") );
-   objetos.push_back( new MallaPLY(raiz + "beethoven.ply") );
-   objetos.push_back( new MallaPLY(raiz + "big_dodge.ply") );
+   //objetos.push_back( new MallaPLY(raiz + "ant.ply") );
+   //objetos.push_back( new MallaPLY(raiz + "beethoven.ply") );
+   //objetos.push_back( new MallaPLY(raiz + "big_dodge.ply") );
 
-   objetos.push_back( new MallaRevolPLY(raiz + "peon.ply", numero_repeticiones) );
-   objetos.push_back( new MallaRevolPLY(raiz + "lata-pcue.ply", numero_repeticiones) );
-   objetos.push_back( new MallaRevolPLY(raiz + "lata-pinf.ply", numero_repeticiones) );
-   objetos.push_back( new MallaRevolPLY(raiz + "lata-psup.ply", numero_repeticiones) );
+   //objetos.push_back( new MallaRevolPLY(raiz + "peon.ply", numero_repeticiones) );
+   //objetos.push_back( new MallaRevolPLY(raiz + "lata-pcue.ply", numero_repeticiones) );
+   //objetos.push_back( new MallaRevolPLY(raiz + "lata-pinf.ply", numero_repeticiones) );
+   //objetos.push_back( new MallaRevolPLY(raiz + "lata-psup.ply", numero_repeticiones) );
+
+   objetos.push_back( new Cilindro(40, 100) );
+   objetos.push_back( new Cono(10, 20) );
+   objetos.push_back( new Esfera(100, 200) );
 
    cout << "hecho." << endl << flush ;
 }
