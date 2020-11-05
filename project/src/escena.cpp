@@ -213,7 +213,11 @@ Escena2::Escena2()
 // los objetos que se indican en los guiones de las práctica 3
 // .......
 
+Escena3::Escena3() {
+   using namespace std;
+   cout << "Creando objetos de escena 3 .... " << flush;
 
+}
 
 // ----------------------------------------------------------------------
 // COMPLETAR: Práctica 4
