@@ -78,9 +78,9 @@ class NodoGrafoEscena : public Objeto3D
    unsigned agregar( const EntradaNGE & entrada );
 
    // construir una entrada y añadirla (al final)
-   unsigned agregar( Objeto3D * pObjeto ); // objeto (copia solo puntero)
-   unsigned agregar( const Matriz4f & pMatriz ); // matriz (copia objeto)
-   unsigned agregar( Material * pMaterial ); // material (copia solo puntero)
+   unsigned agregar( Objeto3D * pObjeto );         // objeto (copia solo puntero)
+   unsigned agregar( const Matriz4f & pMatriz );   // matriz (copia objeto)
+   unsigned agregar( Material * pMaterial );       // material (copia solo puntero)
 
    // devuelve el puntero a la matriz en la i-ésima entrada
    Matriz4f * leerPtrMatriz( unsigned iEnt );
