@@ -164,6 +164,10 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
       // del objeto actual ('objeto'), se debe usar 'ProcesarTeclaAnimacion' si devuelve
       // 'true', forzar revisualizar escena (asignando valor a 'revisualizar_escena')
 
+      if (ProcesarTeclaAnimacion(objeto, key)) {
+         revisualizar_escena = true;
+      }
+
       return ; // finalizar la f.g.e, ya que si está la tecla A pulsada no se mira ninguna otra tecla.
    }
 
@@ -191,11 +195,11 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
          camara->desplRotarXY( 0.0, -cam_ab_incre_tecla );
          break;
 
-      case GLFW_KEY_KP_SUBTRACT :  // tecla '-' en el teclado numérico
+      case GLFW_KEY_0 :       // Sobreescrito -> 0
          camara->moverZ( +cam_d_incre_tecla );
          break;
 
-      case GLFW_KEY_KP_ADD :        // tecla '+' en el teclado numérico ¿?
+      case GLFW_KEY_1 :        // Sobreescrito -> 1
          camara->moverZ( -cam_d_incre_tecla );
          break;
 
