@@ -65,6 +65,7 @@ class NodoGrafoEscena : public Objeto3D
    protected:
    // COMPLETAR: práctica 3: definir variables y métodos privados del nodo
    // .......
+      std::vector<EntradaNGE> entradas;
 
    public:
 
@@ -92,10 +93,6 @@ class NodoGrafoEscena : public Objeto3D
    // si 'centro_calculado' es 'false', recalcula el centro usando los centros
    // de los hijos (el punto medio de la caja englobante de los centros de hijos)
    virtual void calcularCentroOC() ;
-
-
-
-
 } ;
 
 #endif // GRAFO_ESCENA_HPP
