@@ -29,15 +29,18 @@
 
 
     class Motherboard: public NodoGrafoEscena {
-
+        public:
+            Motherboard();
     };
 
     class IO_shield: public NodoGrafoEscena {
-
+        public:
+            IO_shield();
     };
 
     class PCIE_port: public NodoGrafoEscena {
-
+        public:
+            PCIE_port();
     };
 
 //
@@ -46,13 +49,20 @@
 
 
     class RAM: public NodoGrafoEscena {
+        public:
+            RAM();
+    };
 
+    class RAM_pinout: public NodoGrafoEscena {
+        public:
+            RAM_pinout();
     };
 
     // ────────────────────────────────────────────────────────────────────────────────
 
     class DIMM_slots: public NodoGrafoEscena {
-
+        public:
+            DIMM_slots();
     };
 
 //
@@ -61,27 +71,39 @@
 
 
     class CPU_cooler: public NodoGrafoEscena {
-
+        public:
+            CPU_cooler();
     };
 
     // ────────────────────────────────────────────────────────────────────────────────
 
     class CPU_cooler_body: public NodoGrafoEscena {
-
+        public:
+            CPU_cooler_body();
     };
 
     // ────────────────────────────────────────────────────────────────────────────────
 
     class CPU_cooler_blade: public NodoGrafoEscena {
-
+        public:
+            CPU_cooler_blade();
     };
 
     // ────────────────────────────────────────────────────────────────────────────────
 
     class CPU_cooler_stem: public NodoGrafoEscena {
-
+        public:
+            CPU_cooler_stem();
     };
 
     // ────────────────────────────────────────────────────────────────────────────────
+
+//
+// ──────────────────────────────────────────────────────────────────── OTROS ─────
+//
+
+    Tupla3f RGB_a_tupla(int R, int G, int B);
+
+    Tupla3f Hex_a_tupla (int hexValue);
 
 #endif

@@ -83,6 +83,9 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
    // COMPLETAR: práctica 3: recorrer las entradas y visualizar cada nodo.
    // ........
    cv.cauce_act->pushMM();    // Guardar modelview
+   const Tupla4f color_previo = leerFijarColVertsCauce(cv);
+
+
 
    for (unsigned i = 0; i < entradas.size(); i++) {
       switch (entradas[i].tipo)
@@ -101,6 +104,7 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
       }
    }
 
+   glColor4fv( color_previo );
 
    // COMPLETAR: práctica 4: en la práctica 4, si 'cv.iluminacion' es 'true',
    // se deben de gestionar los materiales:
