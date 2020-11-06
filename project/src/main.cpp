@@ -283,7 +283,6 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
 
 
 
-
       // COMPLETAR; Práctica 5. conmutar 'cv.visualizar_fbo' con la tecla 'Y'
 
 
@@ -463,14 +462,15 @@ void Inicializar( int argc, char *argv[] )
 
    // crear los objetos y las escenas que forman, insertar escenas en 'escenas'
 
-   escenas.push_back( new Escena1() );
+   //escenas.push_back( new Escena1() );
 
    // COMPLETAR: Prácticas 2,3,4 y 5
    // hacer 'push_back' en el vector de escenas de instancias de 'Escena2',
    // 'Escena3', etc..
    // ......
 
-   escenas.push_back( new Escena2() );
+   //escenas.push_back( new Escena2() );
+   escenas.push_back( new Escena3() );
 
 
 }

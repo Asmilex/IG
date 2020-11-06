@@ -11,6 +11,8 @@
 #include "materiales-luces.h"
 #include "seleccion.h"
 
+#include "modelo-jer.h"
+
 
 
 
@@ -216,6 +218,11 @@ Escena2::Escena2()
 Escena3::Escena3() {
    using namespace std;
    cout << "Creando objetos de escena 3 .... " << flush;
+
+   objetos.push_back(new C());
+
+   cout << "hecho." << endl << flush ;
+
 
 }
 
