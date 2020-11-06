@@ -251,3 +251,90 @@ Cubo::Cubo()
          col_ver.push_back(   { RNG(0, 1), RNG(0, 1), RNG(0, 1) } );
       }
    }
+
+   CPU_cooler_body::CPU_cooler_body() : MallaInd("CPU cooler body")
+   {
+      float border_width = 0.1;
+      float length = 0.5;
+      float heigth = 0.5;
+
+      vertices = {
+         // Parte superior externa
+         {-length, heigth ,-length},
+         { length, heigth, -length},
+         {-length, heigth, length},
+         { length, heigth, length},
+
+         // Parte inferior externa
+         {-length, 0, -length},
+         { length, 0, -length},
+         {-length, 0,length},
+         { length, 0, length},
+
+         // Parte superior interna
+         {-length + border_width, heigth ,-length + border_width},
+         { length - border_width, heigth, -length + border_width},
+         {-length + border_width, heigth, length - border_width},
+         { length - border_width, heigth, length - border_width},
+
+         // Parte inferior interna
+         {-length + border_width, 0, -length + border_width},
+         { length - border_width, 0, -length + border_width},
+         {-length + border_width, 0, length - border_width},
+         { length - border_width, 0, length - border_width},
+      };
+
+      triangulos = {
+         // Parte trasera exterior
+         {4, 1, 0},
+         {5, 1, 4},
+
+         // Parte derecha exterior
+         {5, 7, 3},
+         {5, 3, 1},
+
+         // Parte frontal exterior
+         {7, 2, 6},
+         {7, 3, 2},
+
+         // Parte izquierda exterior
+         {6, 4, 2},
+         {4, 0, 2},
+
+
+         // Uniones de la parte superior
+         {8, 1, 0},
+         {8, 9, 1},
+
+         {3, 1, 9},
+         {3, 9, 11},
+
+         {2, 3, 11},
+         {2, 11, 10},
+
+         {2, 10, 8},
+         {2, 8, 0},
+
+         // Uniones de la parte inferior
+         {12, 5, 4},
+         {12, 13, 5},
+
+         {15, 5, 13},
+         {15, 7, 5},
+
+         {6, 7, 15},
+         {15, 14, 6},
+
+         {6, 14, 12},
+         {12, 4, 6},
+      };
+
+      // Parte interior: exterior + 8
+      for (int i = 0; i < 8; i++) {
+         triangulos.push_back(
+            {triangulos[i](0) + 8, triangulos[i](1) + 8, triangulos[i](2) + 8}
+         );
+      }
+
+      ponerColor({24.0/255.0, 21.0/255.0, 22.0/255.0});
+   };
