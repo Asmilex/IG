@@ -1,5 +1,6 @@
 #include "modelo-jer.h"
 #include "malla-ind.h"
+#include "malla-revol.h"
 
 C::C() {
     //agregar( new RAM() );
@@ -41,7 +42,50 @@ RAM_pinout::RAM_pinout() {
 CPU_cooler::CPU_cooler() {
     agregar( new CPU_cooler_body() );
 
+    agregar (MAT_Escalado(.12, .15, .12));
+    agregar( new CPU_cooler_stem() );
+
+    agregar( MAT_Traslacion(1.2, 0, 0.9) );
+    agregar( MAT_Rotacion(-35, 1, 0, 0) );
+
+    agregar( new CPU_cooler_blade() );
+
+    agregar( MAT_Traslacion(-2.4, 1, -1.5) );
+    agregar( MAT_Rotacion(70, 1, 0, 0) );
+
+    agregar( new CPU_cooler_blade() );
+
+    agregar( MAT_Inversa(MAT_Rotacion(70, 1, 0, 0)) );
+    agregar( MAT_Inversa(MAT_Rotacion(-35, 1, 0, 0)) );
+    agregar( MAT_Rotacion(90, 0, 1, 0) );
+    agregar( MAT_Rotacion(-35, 1, 0, 0) );
+    agregar( MAT_Traslacion(0.5, -1, 1.8) );
+
+    agregar( new CPU_cooler_blade() );
+
+    agregar( MAT_Traslacion(-2.5, 1, -1.5) );
+    agregar( MAT_Inversa(MAT_Rotacion(-35, 1, 0, 0)) );
+    //agregar( MAT_Inversa(MAT_Rotacion(90, 0, 1, 0)) );
+
+    agregar( MAT_Rotacion(35, 1, 0, 0) );
+
+    agregar( new CPU_cooler_blade() );
 }
+
+
+CPU_cooler_stem::CPU_cooler_stem() {
+    agregar (new Cilindro(30, 30));
+    ponerColor(Hex_a_tupla(0x5D5D5D));
+}
+
+
+CPU_cooler_blade::CPU_cooler_blade() {
+    agregar( MAT_Traslacion(0, 1.6, 0));
+    agregar( MAT_Escalado(1.7, 1.4, .02) );
+
+    agregar( new Cubo() );
+}
+
 //
 // ──────────────────────────────────────────────────────────────────── OTROS ─────
 //
