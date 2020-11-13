@@ -62,9 +62,9 @@
     };
 
 
-    class DIMM_slots: public NodoGrafoEscena {
+    class DIMM_slot: public NodoGrafoEscena {
         public:
-            DIMM_slots();
+            DIMM_slot();
     };
 
 //
@@ -75,6 +75,12 @@
     class CPU_cooler: public NodoGrafoEscena {
         public:
             CPU_cooler();
+    };
+
+
+    class CPU_cooler_fan_system: public NodoGrafoEscena {
+        public:
+            CPU_cooler_fan_system();
     };
 
 

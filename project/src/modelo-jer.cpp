@@ -3,8 +3,47 @@
 #include "malla-revol.h"
 
 C::C() {
-    //agregar( new RAM() );
-    agregar( new CPU_cooler() );
+    agregar(new Motherboard());
+}
+
+Motherboard::Motherboard() {
+    //Posicionar DIMM slots
+    Matriz4f traslacion_slot1 = MAT_Traslacion(1, 0, -.1);
+    Matriz4f escala_slot = MAT_Escalado(.8, .8, .8);
+
+    agregar(traslacion_slot1);
+    agregar(escala_slot);
+    agregar( new DIMM_slot() );
+
+
+    Matriz4f traslacion_slot2 = MAT_Traslacion(.2, 0, 0);
+    agregar(traslacion_slot2);
+
+    agregar( new DIMM_slot() );
+
+    agregar( MAT_Inversa(traslacion_slot2));
+    agregar( MAT_Inversa(escala_slot));
+    agregar( MAT_Inversa(traslacion_slot1));
+
+    // Posicionar disipador
+    Matriz4f escala_cooler = MAT_Escalado(1.3, 1.3, 1.3);
+    agregar(escala_cooler);
+    agregar(new CPU_cooler());
+    agregar(MAT_Inversa(escala_cooler));
+
+
+    // Posicionar puerto PCIe
+    Matriz4f traslacion_PCIe_port = MAT_Traslacion(0, 0, 1);
+    agregar(traslacion_PCIe_port);
+    agregar(new PCIE_port());
+    agregar(MAT_Inversa(traslacion_PCIe_port));
+
+    // Colocar base
+    agregar( MAT_Traslacion(0, -0.01, 0) );
+    agregar( MAT_Escalado(1.4, 0.01, 1.4) );
+    agregar( new Cubo() );
+
+    ponerColor( Hex_a_tupla(0x636060) );
 }
 
 // ────────────────────────────────────────────────────────────────────────────────
@@ -37,12 +76,34 @@ RAM_pinout::RAM_pinout() {
     //agregar( new Cubo());
 }
 
+DIMM_slot::DIMM_slot() {
+    agregar( MAT_Escalado(0.03, 0.01, 1) );
+    agregar( new Cubo() );
+
+    Cubo * clip = new Cubo();
+    clip->ponerColor(Hex_a_tupla(0x463D3E));
+
+    agregar(MAT_Traslacion(0, 0.3, 1.02));
+    agregar(MAT_Escalado(1, 5, 0.02));
+    agregar( clip );
+
+    agregar( MAT_Traslacion(0, 0, -102) );
+    agregar(clip);
+
+    ponerColor(Hex_a_tupla(0x1B1515));
+}
+
 // ────────────────────────────────────────────────────────────────────────────────
 
 CPU_cooler::CPU_cooler() {
     agregar( new CPU_cooler_body() );
 
-    agregar (MAT_Escalado(.12, .15, .12));
+    agregar( MAT_Escalado(.12, .15, .12) );
+    agregar( new CPU_cooler_fan_system() );
+}
+
+
+CPU_cooler_fan_system::CPU_cooler_fan_system() {
     agregar( new CPU_cooler_stem() );
 
     agregar( MAT_Traslacion(1.2, 0, 0.9) );
@@ -75,7 +136,7 @@ CPU_cooler::CPU_cooler() {
 
 CPU_cooler_stem::CPU_cooler_stem() {
     agregar (new Cilindro(30, 30));
-    ponerColor(Hex_a_tupla(0x5D5D5D));
+    ponerColor(Hex_a_tupla(0x181516));
 }
 
 
@@ -83,9 +144,28 @@ CPU_cooler_blade::CPU_cooler_blade() {
     agregar( MAT_Traslacion(0, 1.6, 0));
     agregar( MAT_Escalado(1.7, 1.4, .02) );
 
-    agregar( new Cubo() );
+    Cubo * blade = new Cubo();
+    blade->ponerColor(Hex_a_tupla(0xE6E6E6));
+    agregar( blade );
 }
+// ────────────────────────────────────────────────────────────────────────────────
 
+PCIE_port::PCIE_port() {
+    agregar(MAT_Rotacion(90, 0, 1, 0));
+    agregar( MAT_Escalado(0.03, 0.01, 1) );
+    agregar( new Cubo() );
+
+    Cubo * clip = new Cubo();
+    clip->ponerColor(Hex_a_tupla(0x463D3E));
+
+    agregar(MAT_Traslacion(0, 0.3, 1.02));
+    agregar(MAT_Escalado(1, 5, 0.02));
+    agregar( clip );
+
+
+    ponerColor(Hex_a_tupla(0x1B1515));
+
+}
 //
 // ──────────────────────────────────────────────────────────────────── OTROS ─────
 //
