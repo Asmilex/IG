@@ -3,39 +3,91 @@
 #include "malla-revol.h"
 
 C::C() {
-    agregar(new Motherboard());
+    agregar(new Motherboard(traslacion_RAM1, traslacion_RAM2, CPU_fan_rotator));
 }
 
-Motherboard::Motherboard() {
-    //Posicionar DIMM slots
+unsigned int C::leerNumParametros() const {
+    return 3;
+}
+
+void C::fijar_trasl_RAM1 (const float h_nueva) {
+    *traslacion_RAM1 = MAT_Traslacion(0, h_nueva, 0);
+}
+
+void C::fijar_trasl_RAM2 (const float h_nueva) {
+    *traslacion_RAM2 = MAT_Traslacion(0, h_nueva, 0);
+}
+
+void C::fijar_CPU_fan_rot (const float alpha) {
+    *CPU_fan_rotator = MAT_Rotacion(alpha, 0, 1, 0);
+}
+
+void C::actualizarEstadoParametro (const unsigned iParam, const float t_sec) {
+    assert (iParam < leerNumParametros());
+
+    switch (iParam) {
+        case 0:
+            fijar_trasl_RAM1 (abs(sin(t_sec)) + 0.4);
+            break;
+        case 1:
+            fijar_trasl_RAM2 (abs(cos(t_sec)));
+            break;
+        case 2:
+            fijar_CPU_fan_rot (100 * t_sec);
+    }
+}
+
+// ────────────────────────────────────────────────────────────────────────────────
+
+Motherboard::Motherboard(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_RAM2, Matriz4f * &CPU_fan_rotator) {
+//
+// ─── RAM Y SLOTS ────────────────────────────────────────────────────────────────
+//
+
     Matriz4f traslacion_slot1 = MAT_Traslacion(1, 0, -.1);
-    Matriz4f escala_slot = MAT_Escalado(.8, .8, .8);
+    Matriz4f escala_slot      = MAT_Escalado(.8, .8, .8);
 
     agregar(traslacion_slot1);
     agregar(escala_slot);
+
     agregar( new DIMM_slot() );
 
+    agregar(new RAM_animator(traslacion_RAM1, traslacion_RAM2) );
 
     Matriz4f traslacion_slot2 = MAT_Traslacion(.2, 0, 0);
     agregar(traslacion_slot2);
 
     agregar( new DIMM_slot() );
 
-    agregar( MAT_Inversa(traslacion_slot2));
-    agregar( MAT_Inversa(escala_slot));
-    agregar( MAT_Inversa(traslacion_slot1));
 
-    // Posicionar disipador
+    // Deshacer este posicionamiento para mayor comodidad
+    agregar( MAT_Inversa(traslacion_slot2) );
+    agregar( MAT_Inversa(escala_slot) );
+    agregar( MAT_Inversa(traslacion_slot1) );
+
+//
+// ─── DISIPADOR ──────────────────────────────────────────────────────────────────
+//
+
+
     Matriz4f escala_cooler = MAT_Escalado(1.3, 1.3, 1.3);
     agregar(escala_cooler);
-    agregar(new CPU_cooler());
+
+    agregar(new CPU_cooler(CPU_fan_rotator));
+
     agregar(MAT_Inversa(escala_cooler));
 
 
-    // Posicionar puerto PCIe
+//
+// ─── RESTO ──────────────────────────────────────────────────────────────────────
+//
+
+
     Matriz4f traslacion_PCIe_port = MAT_Traslacion(0, 0, 1);
     agregar(traslacion_PCIe_port);
+
     agregar(new PCIE_port());
+
     agregar(MAT_Inversa(traslacion_PCIe_port));
 
     // Colocar base
@@ -43,6 +95,7 @@ Motherboard::Motherboard() {
     agregar( MAT_Escalado(1.4, 0.01, 1.4) );
     agregar( new Cubo() );
 
+    // Guardar matrices de movimiento
     ponerColor( Hex_a_tupla(0x636060) );
 }
 
@@ -50,7 +103,9 @@ Motherboard::Motherboard() {
 
 RAM::RAM() {
     // Cuerpo
-    const float cte = 0.01;
+    agregar (MAT_Rotacion(90, 0, 1, 0));
+
+    const float cte = 0.034;
     agregar( MAT_Escalado(cte * 29.5, cte * 11.2, cte * 0.75) );
     agregar( new Cubo() );
 
@@ -93,13 +148,35 @@ DIMM_slot::DIMM_slot() {
     ponerColor(Hex_a_tupla(0x1B1515));
 }
 
+RAM_animator::RAM_animator(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_RAM2) {
+    unsigned ind_trasla_RAM1 = agregar(MAT_Traslacion(0, 1, 0));
+    traslacion_RAM1 =  leerPtrMatriz(ind_trasla_RAM1);
+
+    agregar( new RAM() );
+
+    agregar (MAT_Inversa((*traslacion_RAM1)));
+
+    // Colocar y animar RAM2
+    agregar (MAT_Traslacion(.2, 0, 0));
+
+    unsigned ind_trasla_RAM2 = agregar(MAT_Traslacion(0, 1, 0));
+    traslacion_RAM2 =  leerPtrMatriz(ind_trasla_RAM2);
+
+    agregar( new RAM() );
+}
+
 // ────────────────────────────────────────────────────────────────────────────────
 
-CPU_cooler::CPU_cooler() {
+CPU_cooler::CPU_cooler(Matriz4f * &rotacion) {
     agregar( new CPU_cooler_body() );
 
     agregar( MAT_Escalado(.12, .15, .12) );
+
+    unsigned ind_rot = agregar (MAT_Rotacion(0, 0, 1, 0));
+
     agregar( new CPU_cooler_fan_system() );
+
+    rotacion = leerPtrMatriz(ind_rot);
 }
 
 
@@ -148,6 +225,7 @@ CPU_cooler_blade::CPU_cooler_blade() {
     blade->ponerColor(Hex_a_tupla(0xE6E6E6));
     agregar( blade );
 }
+
 // ────────────────────────────────────────────────────────────────────────────────
 
 PCIE_port::PCIE_port() {

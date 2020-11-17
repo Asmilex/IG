@@ -15,12 +15,18 @@
 //
 
     class C: public NodoGrafoEscena {
-    private:
+    protected:
+        Matriz4f * traslacion_RAM1 = nullptr;
+        Matriz4f * traslacion_RAM2 = nullptr;
+        Matriz4f * CPU_fan_rotator = nullptr;
+        void actualizarEstadoParametro (const unsigned iParam, const float t_sec);
 
     public:
-            C ();
-            void leerNumParametros ();
-            void actualizarEstadoParametro ();
+        C ();
+        unsigned int leerNumParametros () const;
+        void fijar_trasl_RAM1 (const float h_nueva);
+        void fijar_trasl_RAM2 (const float h_nueva);
+        void fijar_CPU_fan_rot (const float alpha);
     };
 
 //
@@ -30,7 +36,7 @@
 
     class Motherboard: public NodoGrafoEscena {
         public:
-            Motherboard();
+            Motherboard(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_RAM2, Matriz4f * &CPU_fan_rotator);
     };
 
 
@@ -55,6 +61,10 @@
             RAM();
     };
 
+    class RAM_animator: public NodoGrafoEscena {
+        public:
+            RAM_animator(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_RAM2);
+    };
 
     class RAM_pinout: public NodoGrafoEscena {
         public:
@@ -74,7 +84,7 @@
 
     class CPU_cooler: public NodoGrafoEscena {
         public:
-            CPU_cooler();
+            CPU_cooler (Matriz4f * &rotacion);
     };
 
 
