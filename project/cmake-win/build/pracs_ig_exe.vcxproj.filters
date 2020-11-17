@@ -28,6 +28,9 @@
     <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\materiales-luces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\modelo-jer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Andre\Repositorios\IG\project\src\objeto3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -79,6 +82,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\materiales-luces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\modelo-jer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Andre\Repositorios\IG\project\include\objeto3d.h">

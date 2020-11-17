@@ -27,13 +27,13 @@ void C::actualizarEstadoParametro (const unsigned iParam, const float t_sec) {
 
     switch (iParam) {
         case 0:
-            fijar_trasl_RAM1 (abs(sin(t_sec)) + 0.4);
+            fijar_trasl_RAM1 (-(cos(M_PI * t_sec) - 1) / 2 + 0.4);
             break;
         case 1:
-            fijar_trasl_RAM2 (abs(cos(t_sec)));
+            fijar_trasl_RAM2 ((cos(M_PI * t_sec) - 0.5) / 2 + 0.4 + 0.5 * sin(3*t_sec) + 0.85);
             break;
         case 2:
-            fijar_CPU_fan_rot (100 * t_sec);
+            fijar_CPU_fan_rot (500 * t_sec);
     }
 }
 
@@ -47,23 +47,22 @@ Motherboard::Motherboard(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_RAM
     Matriz4f traslacion_slot1 = MAT_Traslacion(1, 0, -.1);
     Matriz4f escala_slot      = MAT_Escalado(.8, .8, .8);
 
-    agregar(traslacion_slot1);
-    agregar(escala_slot);
+    agregar(traslacion_slot1 * escala_slot);
 
     agregar( new DIMM_slot() );
 
-    agregar(new RAM_animator(traslacion_RAM1, traslacion_RAM2) );
+    agregar( new RAM_animator(traslacion_RAM1, traslacion_RAM2) );
 
     Matriz4f traslacion_slot2 = MAT_Traslacion(.2, 0, 0);
     agregar(traslacion_slot2);
 
     agregar( new DIMM_slot() );
 
-
     // Deshacer este posicionamiento para mayor comodidad
-    agregar( MAT_Inversa(traslacion_slot2) );
-    agregar( MAT_Inversa(escala_slot) );
-    agregar( MAT_Inversa(traslacion_slot1) );
+    agregar(  MAT_Inversa(traslacion_slot2)
+            * MAT_Inversa(escala_slot)
+            * MAT_Inversa(traslacion_slot1)
+    );
 
 //
 // ─── DISIPADOR ──────────────────────────────────────────────────────────────────
@@ -88,11 +87,11 @@ Motherboard::Motherboard(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_RAM
 
     agregar(new PCIE_port());
 
-    agregar(MAT_Inversa(traslacion_PCIe_port));
+    agregar (   MAT_Inversa(traslacion_PCIe_port)
+              * MAT_Traslacion(0, -0.01, 0)
+              * MAT_Escalado(1.4, 0.01, 1.4)
+    );
 
-    // Colocar base
-    agregar( MAT_Traslacion(0, -0.01, 0) );
-    agregar( MAT_Escalado(1.4, 0.01, 1.4) );
     agregar( new Cubo() );
 
     // Guardar matrices de movimiento
@@ -109,7 +108,6 @@ RAM::RAM() {
     agregar( MAT_Escalado(cte * 29.5, cte * 11.2, cte * 0.75) );
     agregar( new Cubo() );
 
-
     // Pines
     agregar( MAT_Traslacion(0, -1.05, 0));
     agregar( new RAM_pinout() );
@@ -120,15 +118,10 @@ RAM::RAM() {
 RAM_pinout::RAM_pinout() {
     const float cte = 0.065;
 
-    agregar (MAT_Traslacion(0, 0, 0));
     agregar( MAT_Escalado(cte * 15.0, cte * 0.8, cte * 3));
     agregar( new Cubo() );
 
     ponerColor(Hex_a_tupla(0x040609));
-
-    //agregar( MAT_Traslacion(2, 0, 0));
-    //agregar( MAT_Escalado(cte * 12.6, cte * 0.5, cte * 0.3));
-    //agregar( new Cubo());
 }
 
 DIMM_slot::DIMM_slot() {
@@ -138,8 +131,10 @@ DIMM_slot::DIMM_slot() {
     Cubo * clip = new Cubo();
     clip->ponerColor(Hex_a_tupla(0x463D3E));
 
-    agregar(MAT_Traslacion(0, 0.3, 1.02));
-    agregar(MAT_Escalado(1, 5, 0.02));
+    agregar (  MAT_Traslacion(0, 0.3, 1.02)
+             * MAT_Escalado(1, 5, 0.02)
+    );
+
     agregar( clip );
 
     agregar( MAT_Traslacion(0, 0, -102) );
@@ -154,13 +149,12 @@ RAM_animator::RAM_animator(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_R
 
     agregar( new RAM() );
 
-    agregar (MAT_Inversa((*traslacion_RAM1)));
-
-    // Colocar y animar RAM2
-    agregar (MAT_Traslacion(.2, 0, 0));
+    agregar (   MAT_Inversa((*traslacion_RAM1))
+              * MAT_Traslacion(.2, 0, 0)
+    );
 
     unsigned ind_trasla_RAM2 = agregar(MAT_Traslacion(0, 1, 0));
-    traslacion_RAM2 =  leerPtrMatriz(ind_trasla_RAM2);
+    traslacion_RAM2 = leerPtrMatriz(ind_trasla_RAM2);
 
     agregar( new RAM() );
 }
@@ -183,29 +177,31 @@ CPU_cooler::CPU_cooler(Matriz4f * &rotacion) {
 CPU_cooler_fan_system::CPU_cooler_fan_system() {
     agregar( new CPU_cooler_stem() );
 
-    agregar( MAT_Traslacion(1.2, 0, 0.9) );
-    agregar( MAT_Rotacion(-35, 1, 0, 0) );
+    agregar (  MAT_Traslacion(1.2, 0, 0.9)
+             * MAT_Rotacion(-35, 1, 0, 0)
+    );
 
     agregar( new CPU_cooler_blade() );
 
-    agregar( MAT_Traslacion(-2.4, 1, -1.5) );
-    agregar( MAT_Rotacion(70, 1, 0, 0) );
+    agregar(  MAT_Traslacion(-2.4, 1, -1.5)
+            * MAT_Rotacion(70, 1, 0, 0)
+    );
 
     agregar( new CPU_cooler_blade() );
 
-    agregar( MAT_Inversa(MAT_Rotacion(70, 1, 0, 0)) );
-    agregar( MAT_Inversa(MAT_Rotacion(-35, 1, 0, 0)) );
-    agregar( MAT_Rotacion(90, 0, 1, 0) );
-    agregar( MAT_Rotacion(-35, 1, 0, 0) );
-    agregar( MAT_Traslacion(0.5, -1, 1.8) );
+    agregar (  MAT_Inversa(MAT_Rotacion(70, 1, 0, 0))
+             * MAT_Inversa(MAT_Rotacion(-35, 1, 0, 0))
+             * MAT_Rotacion(90, 0, 1, 0)
+             * MAT_Rotacion(-35, 1, 0, 0)
+             * MAT_Traslacion(0.5, -1, 1.8)
+    );
 
     agregar( new CPU_cooler_blade() );
 
-    agregar( MAT_Traslacion(-2.5, 1, -1.5) );
-    agregar( MAT_Inversa(MAT_Rotacion(-35, 1, 0, 0)) );
-    //agregar( MAT_Inversa(MAT_Rotacion(90, 0, 1, 0)) );
-
-    agregar( MAT_Rotacion(35, 1, 0, 0) );
+    agregar (  MAT_Traslacion(-2.5, 1, -1.5)
+             * MAT_Inversa(MAT_Rotacion(-35, 1, 0, 0))
+             * MAT_Rotacion(35, 1, 0, 0)
+    );
 
     agregar( new CPU_cooler_blade() );
 }
@@ -218,8 +214,9 @@ CPU_cooler_stem::CPU_cooler_stem() {
 
 
 CPU_cooler_blade::CPU_cooler_blade() {
-    agregar( MAT_Traslacion(0, 1.6, 0));
-    agregar( MAT_Escalado(1.7, 1.4, .02) );
+    agregar(  MAT_Traslacion(0, 1.6, 0)
+            * MAT_Escalado(1.7, 1.4, .02)
+    );
 
     Cubo * blade = new Cubo();
     blade->ponerColor(Hex_a_tupla(0xE6E6E6));
@@ -229,17 +226,19 @@ CPU_cooler_blade::CPU_cooler_blade() {
 // ────────────────────────────────────────────────────────────────────────────────
 
 PCIE_port::PCIE_port() {
-    agregar(MAT_Rotacion(90, 0, 1, 0));
-    agregar( MAT_Escalado(0.03, 0.01, 1) );
+    agregar (  MAT_Rotacion(90, 0, 1, 0)
+             * MAT_Escalado(0.03, 0.01, 1)
+    );
+
     agregar( new Cubo() );
 
     Cubo * clip = new Cubo();
     clip->ponerColor(Hex_a_tupla(0x463D3E));
 
-    agregar(MAT_Traslacion(0, 0.3, 1.02));
-    agregar(MAT_Escalado(1, 5, 0.02));
+    agregar (  MAT_Traslacion(0, 0.3, 1.02)
+             * MAT_Escalado(1, 5, 0.02)
+    );
     agregar( clip );
-
 
     ponerColor(Hex_a_tupla(0x1B1515));
 
