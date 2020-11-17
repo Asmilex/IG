@@ -3,11 +3,14 @@
 #include "malla-revol.h"
 
 C::C() {
+    agregar(MAT_Rotacion(40, 1, 0, 0));
+    unsigned ind_rot_mobo = agregar (MAT_Rotacion(0, 0, 1, 0));
     agregar(new Motherboard(traslacion_RAM1, traslacion_RAM2, CPU_fan_rotator));
+    mobo_rotator = leerPtrMatriz(ind_rot_mobo);
 }
 
 unsigned int C::leerNumParametros() const {
-    return 3;
+    return 4;
 }
 
 void C::fijar_trasl_RAM1 (const float h_nueva) {
@@ -22,6 +25,10 @@ void C::fijar_CPU_fan_rot (const float alpha) {
     *CPU_fan_rotator = MAT_Rotacion(alpha, 0, 1, 0);
 }
 
+void C::fijar_mobo_rot (const float alpha) {
+    *mobo_rotator = MAT_Rotacion(alpha, 0, 1, 0);
+}
+
 void C::actualizarEstadoParametro (const unsigned iParam, const float t_sec) {
     assert (iParam < leerNumParametros());
 
@@ -34,6 +41,11 @@ void C::actualizarEstadoParametro (const unsigned iParam, const float t_sec) {
             break;
         case 2:
             fijar_CPU_fan_rot (500 * t_sec);
+            break;
+        case 3:
+            fijar_mobo_rot (5 * t_sec);
+            break;
+
     }
 }
 

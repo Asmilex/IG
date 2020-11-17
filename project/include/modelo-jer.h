@@ -19,6 +19,7 @@
         Matriz4f * traslacion_RAM1 = nullptr;
         Matriz4f * traslacion_RAM2 = nullptr;
         Matriz4f * CPU_fan_rotator = nullptr;
+        Matriz4f * mobo_rotator    = nullptr;
         void actualizarEstadoParametro (const unsigned iParam, const float t_sec);
 
     public:
@@ -27,6 +28,7 @@
         void fijar_trasl_RAM1 (const float h_nueva);
         void fijar_trasl_RAM2 (const float h_nueva);
         void fijar_CPU_fan_rot (const float alpha);
+        void fijar_mobo_rot (const float alpha);
     };
 
 //
