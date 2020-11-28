@@ -43,9 +43,23 @@ class MallaInd : public Objeto3D
       // calculo de las normales de triángulos (solo si no están creadas ya)
       void calcularNormalesTriangulos() ;
 
-
-
    public:
+//
+// ─────────────────────────────────────────────────────────────────── EXAMEN ─────
+//
+
+      std::vector<Tupla3f> esferaXZ;
+      std::vector<Tupla3f> esferaYZ;
+      std::vector<Tupla3f> esferaXY;
+      const int num_vertices = 10;
+
+      Tupla3f centro_geometrico();
+      float distancia_max_centro();
+      void calcular_vertices_esfera();
+      void visualizar_esfera();
+
+// ────────────────────────────────────────────────────────────────────────────────
+
       // crea una malla vacía (nombre: "malla indexada nueva vacía")
       MallaInd() ;
 

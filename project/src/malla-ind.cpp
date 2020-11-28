@@ -133,11 +133,120 @@ void MallaInd::visualizarGL( ContextoVis & cv )
       array_verts->visualizarGL_MD_VAO(GL_TRIANGLES);
    }
 
+//
+// ─────────────────────────────────────────────────────────────────── EXAMEN ─────
+//
+   // Inyectar renderizado de la esfera
+
+   if (esferaXY.size() == 0  || esferaXZ.size() == 0 || esferaYZ.size() == 0) {
+      calcular_vertices_esfera();
+   }
+
+   visualizar_esfera();
+
+// ────────────────────────────────────────────────────────────────────────────────
+
    // restaurar el color previamente fijado
    glColor4fv( color_previo );
 }
 
+//
+// ─────────────────────────────────────────────────────────────────── EXAMEN ─────
+//
 
+float distancia_euclidea (Tupla3f a, Tupla3f b) {
+   return sqrt(
+         (a(0) - b(0))*(a(0) - b(0))
+      +  (a(1) - b(1))*(a(1) - b(1))
+      +  (a(2) - b(2))*(a(2) - b(2))
+   );
+}
+
+Tupla3f MallaInd::centro_geometrico() {
+   if (array_verts != nullptr) {
+      Tupla3f centro;
+
+      for (auto vertice: vertices) {
+         centro = centro + vertice;
+      }
+
+      return centro;
+   }
+   else {
+      return {0, 0, 0};
+   }
+}
+
+float MallaInd::distancia_max_centro() {
+   Tupla3f centro = centro_geometrico();
+
+   float distancia_max    = 0;
+   float distancia_actual = 0;
+
+   for (auto vertice: vertices) {
+      distancia_actual = distancia_euclidea(vertice, centro);
+
+      if (distancia_max < distancia_actual)
+         distancia_max = distancia_actual;
+   }
+
+   return distancia_max;
+}
+
+void MallaInd::calcular_vertices_esfera() {
+   static ArrayVertices * last_drawcall = nullptr;
+
+   if (last_drawcall != array_verts) {
+      // Hallar punto en 0,0,0 por facilidad
+      // Rotar
+      // Trasladar a centro
+      float   distancia = distancia_max_centro();
+      Tupla3f centro    = centro_geometrico();
+
+      esferaXZ.push_back(centro + Tupla3f(distancia, 0, 0));
+      esferaYZ.push_back(centro + Tupla3f(0, 0, distancia));
+      esferaXY.push_back(centro + Tupla3f(distancia, 0, 0));
+
+      for (size_t i = 0; i < num_vertices; i++) {
+         esferaYZ.push_back(
+            centro + MAT_Rotacion(i/num_vertices, 1, 0, 0) * Tupla3f(0, 0, distancia)
+         );
+
+         esferaXZ.push_back(
+            centro + MAT_Rotacion(i/num_vertices, 0, 1, 0) * Tupla3f(distancia, 0, 0)
+         );
+
+         esferaXY.push_back(
+            centro + MAT_Rotacion(i/num_vertices, 0, 0, 1) * Tupla3f(distancia, 0, 0)
+         );
+      }
+   }
+
+   if (array_verts != last_drawcall) {
+      last_drawcall == array_verts;
+   }
+}
+
+void MallaInd::visualizar_esfera() {
+   //FIXME
+   glBegin(GL_LINES);
+
+   glLineWidth(0.5);
+
+   for (int i = 0; i < num_vertices; i++) {
+      glVertex3f(esferaXY[i](0), esferaXY[i](1), esferaXY[i](2));
+   }
+
+   for (int i = 0; i < num_vertices; i++) {
+      glVertex3f(esferaYZ[i](0), esferaYZ[i](1), esferaYZ[i](2));
+   }
+
+   for (int i = 0; i < num_vertices; i++) {
+      glVertex3f(esferaXZ[i](0), esferaXZ[i](1), esferaXZ[i](2));
+   }
+
+   glEnd();
+}
 // *****************************************************************************
 
 

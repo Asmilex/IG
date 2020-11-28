@@ -171,8 +171,8 @@ Escena1::Escena1()
    // .........
 
    for (int i = 0; i < 2; i++) {
-      objetos.push_back( new Tetraedro() );
-      objetos.push_back( new CuboColores() );
+      Tetraedro * tetraedro = new Tetraedro();
+      objetos.push_back(tetraedro);
    }
 
    cout << "hecho." << endl << flush ;
