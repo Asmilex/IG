@@ -174,7 +174,7 @@ Escena1::Escena1()
       Tetraedro * tetraedro = new Tetraedro();
       objetos.push_back(tetraedro);
    }
-
+   objetos.push_back(new CuboColores() );
    cout << "hecho." << endl << flush ;
 }
 

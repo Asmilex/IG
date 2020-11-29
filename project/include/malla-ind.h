@@ -51,7 +51,9 @@ class MallaInd : public Objeto3D
       std::vector<Tupla3f> esferaXZ;
       std::vector<Tupla3f> esferaYZ;
       std::vector<Tupla3f> esferaXY;
-      const int num_vertices = 10;
+      std::vector<Tupla2i> indices_esfera;
+
+      const int num_vertices = 50;
 
       Tupla3f centro_geometrico();
       float distancia_max_centro();

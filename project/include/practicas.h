@@ -111,6 +111,8 @@ class ContextoVis
 
    // suavizar aristas (y puntos) si/no
    bool suavizar_aristas = false ;
+
+   bool renderizar_esfera = true;
 };
 
 #endif // PRACTICAS_H

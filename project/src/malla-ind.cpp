@@ -137,12 +137,13 @@ void MallaInd::visualizarGL( ContextoVis & cv )
 // ─────────────────────────────────────────────────────────────────── EXAMEN ─────
 //
    // Inyectar renderizado de la esfera
+   if (cv.renderizar_esfera) {
+      if (esferaXY.size() == 0  || esferaXZ.size() == 0 || esferaYZ.size() == 0) {
+         calcular_vertices_esfera();
+      }
 
-   if (esferaXY.size() == 0  || esferaXZ.size() == 0 || esferaYZ.size() == 0) {
-      calcular_vertices_esfera();
+      visualizar_esfera();
    }
-
-   visualizar_esfera();
 
 // ────────────────────────────────────────────────────────────────────────────────
 
@@ -164,13 +165,13 @@ float distancia_euclidea (Tupla3f a, Tupla3f b) {
 
 Tupla3f MallaInd::centro_geometrico() {
    if (array_verts != nullptr) {
-      Tupla3f centro;
+      Tupla3f centro (0, 0, 0);
 
       for (auto vertice: vertices) {
          centro = centro + vertice;
       }
 
-      return centro;
+      return centro * 1/vertices.size();
    }
    else {
       return {0, 0, 0};
@@ -197,6 +198,8 @@ void MallaInd::calcular_vertices_esfera() {
    static ArrayVertices * last_drawcall = nullptr;
 
    if (last_drawcall != array_verts) {
+      indices_esfera.clear();
+
       // Hallar punto en 0,0,0 por facilidad
       // Rotar
       // Trasladar a centro
@@ -208,18 +211,27 @@ void MallaInd::calcular_vertices_esfera() {
       esferaXY.push_back(centro + Tupla3f(distancia, 0, 0));
 
       for (size_t i = 0; i < num_vertices; i++) {
+         float angulo = ((2*M_PI*i)/(num_vertices - 1))*(180/M_PI);
+
          esferaYZ.push_back(
-            centro + MAT_Rotacion(i/num_vertices, 1, 0, 0) * Tupla3f(0, 0, distancia)
+            centro + MAT_Rotacion(angulo, 1, 0, 0) * Tupla3f(0, 0, distancia)
          );
 
          esferaXZ.push_back(
-            centro + MAT_Rotacion(i/num_vertices, 0, 1, 0) * Tupla3f(distancia, 0, 0)
+            centro + MAT_Rotacion(angulo, 0, 1, 0) * Tupla3f(distancia, 0, 0)
          );
 
          esferaXY.push_back(
-            centro + MAT_Rotacion(i/num_vertices, 0, 0, 1) * Tupla3f(distancia, 0, 0)
+            centro + MAT_Rotacion(angulo, 0, 0, 1) * Tupla3f(distancia, 0, 0)
          );
+
       }
+
+      // Calcular índices
+      for (GLuint i = 0; i < esferaXY.size() - 2; i++)
+         indices_esfera.push_back(Tupla2i(i, i+1));
+
+      indices_esfera.push_back(Tupla2i(esferaXY.size() - 1, 0));
    }
 
    if (array_verts != last_drawcall) {
@@ -228,24 +240,26 @@ void MallaInd::calcular_vertices_esfera() {
 }
 
 void MallaInd::visualizar_esfera() {
-   //FIXME
-   glBegin(GL_LINES);
+   glBindVertexArray(0);
+
+   // habilitar uso de un array de vértices
+   glEnableClientState ( GL_VERTEX_ARRAY );
 
    glLineWidth(0.5);
+   glColor3f(1.0, 0.5, 0.0);
+   // indicar el formato y la dirección de memoria del array de vértices
+   // (son tuplas de 3 valores float, sin espacio entre ellas)
+   glVertexPointer ( 3 , GL_FLOAT , 0 , esferaXY.data() ) ;
+   glDrawElements (GL_LINE_LOOP, 2 * indices_esfera.size(), GL_UNSIGNED_INT , indices_esfera.data());
 
-   for (int i = 0; i < num_vertices; i++) {
-      glVertex3f(esferaXY[i](0), esferaXY[i](1), esferaXY[i](2));
-   }
+   glVertexPointer ( 3 , GL_FLOAT , 0 , esferaYZ.data() );
+   glDrawElements (GL_LINE_LOOP, indices_esfera.size()*2, GL_UNSIGNED_INT , indices_esfera.data());
 
-   for (int i = 0; i < num_vertices; i++) {
-      glVertex3f(esferaYZ[i](0), esferaYZ[i](1), esferaYZ[i](2));
-   }
+   glVertexPointer ( 3 , GL_FLOAT , 0 , esferaXZ.data() ) ;
+   glDrawElements (GL_LINE_LOOP, indices_esfera.size()*2, GL_UNSIGNED_INT , indices_esfera.data());
 
-   for (int i = 0; i < num_vertices; i++) {
-      glVertex3f(esferaXZ[i](0), esferaXZ[i](1), esferaXZ[i](2));
-   }
-
-   glEnd();
+   // deshabilitar array de vértices
+   glDisableClientState( GL_VERTEX_ARRAY );
 }
 // *****************************************************************************
 

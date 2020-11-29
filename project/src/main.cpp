@@ -178,6 +178,10 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
    switch ( key )
    {
       // teclas de camara :
+      case GLFW_KEY_U:
+         cv.renderizar_esfera = !cv.renderizar_esfera;
+         break;
+
 
       case GLFW_KEY_LEFT:
          camara->desplRotarXY( +cam_ab_incre_tecla, 0.0 );
@@ -469,8 +473,8 @@ void Inicializar( int argc, char *argv[] )
    // 'Escena3', etc..
    // ......
 
-   //escenas.push_back( new Escena2() );
-   //escenas.push_back( new Escena3() );
+   escenas.push_back( new Escena2() );
+   escenas.push_back( new Escena3() );
 
 
 }
