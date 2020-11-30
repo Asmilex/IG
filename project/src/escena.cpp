@@ -218,7 +218,8 @@ Escena3::Escena3() {
    using namespace std;
    cout << "Creando objetos de escena 3 .... " << flush;
 
-   objetos.push_back(new C());
+   for (int i = 3; i < 20; i++)
+      objetos.push_back(new GrafoEscenaY(i));
 
    cout << "hecho." << endl << flush ;
 

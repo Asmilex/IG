@@ -229,3 +229,37 @@ bool NodoGrafoEscena::buscarObjeto
    // ni este nodo ni ningún hijo es el buscado: terminar
    return false ;
 }
+
+GrafoEscenaY::GrafoEscenaY(unsigned n) {
+   unsigned indice = agregar(MAT_Rotacion(0, 0, 1, 0));
+   giro = leerPtrMatriz(indice);
+   agregar (MAT_Traslacion(-1.2, 0, -1.2));
+   agregar (MAT_Escalado(2.4, 2.4, 2.4));
+   agregar( new EstrellaY(n) );
+
+   agregar(MAT_Inversa(MAT_Escalado(2.4, 2.4, 2.4)));
+   agregar(MAT_Inversa(MAT_Traslacion(-1.2, 0, -1.2)));
+   agregar(MAT_Escalado(0.13, 0.14, 0.13));
+
+   agregar(new Sistema_conos(n));
+}
+
+
+void GrafoEscenaY::fijar_giro (const float angulo) {
+    *giro = MAT_Rotacion(angulo, 0, 1, 0);
+}
+
+void GrafoEscenaY::actualizarEstadoParametro (const unsigned iParam, const float t_sec) {
+    assert (iParam < leerNumParametros());
+
+    switch (iParam) {
+        case 0:
+            fijar_giro (5 * t_sec);
+            break;
+    }
+}
+
+
+unsigned int GrafoEscenaY::leerNumParametros() const {
+    return 1;
+}

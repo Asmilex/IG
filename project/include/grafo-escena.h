@@ -28,6 +28,7 @@
 #include "matrices-tr.h"
 #include "objeto3d.h"
 #include "materiales-luces.h"
+#include "malla-revol.h"
 
 // *********************************************************************
 // declaración adelantada de estructura para un nodo del grafo de escena
@@ -94,6 +95,38 @@ class NodoGrafoEscena : public Objeto3D
    // de los hijos (el punto medio de la caja englobante de los centros de hijos)
    virtual void calcularCentroOC() ;
 } ;
+
+
+
+class GrafoEscenaY: public NodoGrafoEscena {
+   Matriz4f * giro = nullptr;
+   public:
+      GrafoEscenaY(unsigned int n);
+      void actualizarEstadoParametro (const unsigned iParam, const float t_sec);
+      unsigned int leerNumParametros () const;
+      void fijar_giro (const float angulo);
+};
+
+class Sistema_conos: public NodoGrafoEscena {
+   public:
+      Matriz4f * giro = nullptr;
+
+      Sistema_conos(int n) {
+         Cono * cono = new Cono(40, 40);
+
+         auto orientacion = MAT_Rotacion(270, 0, 0, 1);
+         for (int i = 0; i < n; i++) {
+            float angulo = 360 * (float)i/(float)n;
+            agregar(MAT_Rotacion(angulo, 0, 1, 0));
+            agregar(MAT_Traslacion(9.5, 0, 0));
+            agregar(orientacion);
+            agregar(cono);
+            agregar(MAT_Inversa(orientacion));
+            agregar(MAT_Inversa(MAT_Traslacion(9.5, 0, 0)));
+            agregar(MAT_Inversa(MAT_Rotacion(angulo, 0, 1, 0)));
+         }
+      }
+};
 
 #endif // GRAFO_ESCENA_HPP
 

@@ -461,7 +461,7 @@ void Inicializar( int argc, char *argv[] )
    InicializaOpenGL() ;
 
    // crear los objetos y las escenas que forman, insertar escenas en 'escenas'
-
+   escenas.push_back( new Escena3() );
    escenas.push_back( new Escena1() );
 
    // COMPLETAR: Prácticas 2,3,4 y 5

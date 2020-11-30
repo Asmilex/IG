@@ -4,7 +4,7 @@
 
 C::C() {
     agregar(MAT_Rotacion(40, 1, 0, 0));
-    
+
     unsigned ind_rot_mobo = agregar (MAT_Rotacion(0, 0, 1, 0));
     agregar(new Motherboard(traslacion_RAM1, traslacion_RAM2, CPU_fan_rotator));
     mobo_rotator = leerPtrMatriz(ind_rot_mobo);
