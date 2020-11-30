@@ -110,4 +110,20 @@ class CPU_cooler_body : public MallaInd
 };
 
 
+
+
+//
+// ─────────────────────────────────────────────────────────────────── EXAMEN ─────
+//
+
+class EstrellaY: public MallaInd {
+   public:
+      EstrellaY(unsigned int n);
+};
+
+class PiramideEstrellaY: public MallaInd {
+   public:
+      PiramideEstrellaY(unsigned int n);
+};
+
 #endif

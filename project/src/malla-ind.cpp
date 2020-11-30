@@ -338,3 +338,90 @@ Cubo::Cubo()
 
       ponerColor({24.0/255.0, 21.0/255.0, 22.0/255.0});
    };
+
+
+EstrellaY::EstrellaY(unsigned int n) : MallaInd("Estrella") {
+   // inicializar tabla de vértices (2n), triángulos (2n + 1) y colores.
+   // Plano perpendicular al eje Y.
+   // Vértices tienen coordenadas en [0, 1]. Centro en 0.5, 0.5, 0.5. Radios de 0.5.
+   // Vértice central de color blanco. Resto de vértices coinciden con su componente en el mundo (entre 0 y 1).
+
+   vertices.push_back(Tupla3f(0.5, 0, 0.5));
+   col_ver.push_back({1.0, 1.0, 1.0});
+   for (int i = 0; i < n; i++) {
+      float angulo = 360 * (float)i/(float)n;
+      vertices.push_back(
+         {vertices[0] + MAT_Rotacion(angulo, 0, 1, 0) * Tupla3f(0.5, 0, 0)}
+      );
+
+      col_ver.push_back(Tupla3f(vertices[i+1](0), vertices[i+1](1), vertices[i+1](2)));
+   }
+
+   for (int i = 0; i < n; i++) {
+      float angulo = 360 * (float)i/(float)n + 360/(2.0 * n);
+      vertices.push_back(
+         {vertices[0] + MAT_Rotacion(angulo, 0, 1, 0) * Tupla3f(0.25, 0, 0)}
+      );
+      col_ver.push_back(Tupla3f(vertices[n+i+1](0), vertices[n+i+1](1), vertices[n+i+1](2)));
+
+   }
+
+   for (int i = 1; i <= n; i++) {
+      triangulos.push_back(Tupla3i(0, n+i, i));
+   }
+
+   for (int i = 1; i < n; i++){
+      triangulos.push_back(Tupla3i(0, (i+1), n+i));
+   }
+   triangulos.push_back(Tupla3i(0, 2*n, 1));
+}
+
+
+
+
+
+PiramideEstrellaY::PiramideEstrellaY(unsigned int n) : MallaInd("Piramide") {
+
+   vertices.push_back(Tupla3f(0.5, 0, 0.5));
+   col_ver.push_back({1.0, 1.0, 1.0});
+   for (int i = 0; i < n; i++) {
+      float angulo = 360 * (float)i/(float)n;
+      vertices.push_back(
+         {vertices[0] + MAT_Rotacion(angulo, 0, 1, 0) * Tupla3f(0.5, 0, 0)}
+      );
+
+      col_ver.push_back(Tupla3f(vertices[i+1](0), vertices[i+1](1), vertices[i+1](2)));
+   }
+
+
+   for (int i = 0; i < n; i++) {
+      float angulo = 360 * (float)i/(float)n + 360/(2.0 * n);
+      vertices.push_back(
+         {vertices[0] + MAT_Rotacion(angulo, 0, 1, 0) * Tupla3f(0.25, 0, 0)}
+      );
+      col_ver.push_back(Tupla3f(vertices[n+i+1](0), vertices[n+i+1](1), vertices[n+i+1](2)));
+
+   }
+
+   vertices.push_back(Tupla3f(0.5, 0.5, 0.5));
+   col_ver.push_back({1.0, 1.0, 1.0});
+
+   for (int i = 1; i <= n; i++) {
+      triangulos.push_back(Tupla3i(0, n+i, i));
+   }
+
+   for (int i = 1; i < n; i++){
+      triangulos.push_back(Tupla3i(0, (i+1), n+i));
+   }
+   triangulos.push_back(Tupla3i(0, 2*n, 1));
+
+   for (int i = 1; i <= n; i++) {
+      triangulos.push_back(Tupla3i(vertices.size() - 1, n+i, i));
+   }
+
+   for (int i = 1; i < n; i++){
+      triangulos.push_back(Tupla3i(vertices.size() - 1, (i+1), n+i));
+   }
+   triangulos.push_back(Tupla3i(vertices.size() - 1, 2*n, 1));
+
+}
