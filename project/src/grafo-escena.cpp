@@ -82,6 +82,29 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
 {
    // COMPLETAR: práctica 3: recorrer las entradas y visualizar cada nodo.
    // ........
+   cv.cauce_act->pushMM();    // Guardar modelview
+   const Tupla4f color_previo = leerFijarColVertsCauce(cv);
+
+
+
+   for (unsigned i = 0; i < entradas.size(); i++) {
+      switch (entradas[i].tipo)
+      {
+         case TipoEntNGE::objeto:
+            entradas[i].objeto->visualizarGL(cv);
+            break;
+
+         case TipoEntNGE::transformacion:
+            cv.cauce_act->compMM( *(entradas[i].matriz));
+            break;
+
+         case TipoEntNGE::material:
+            cout << "WIP";
+            break;
+      }
+   }
+
+   glColor4fv( color_previo );
 
    // COMPLETAR: práctica 4: en la práctica 4, si 'cv.iluminacion' es 'true',
    // se deben de gestionar los materiales:
@@ -90,7 +113,7 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
    //   3. al finalizar, restaurar el material activo al inicio (si es distinto del actual)
 
 
-
+   cv.cauce_act->popMM();
 }
 
 
@@ -119,9 +142,11 @@ unsigned NodoGrafoEscena::agregar( const EntradaNGE & entrada )
 {
    // COMPLETAR: práctica 3: agregar la entrada al nodo, devolver índice de la entrada agregada
    // ........
-   return 0 ; // sustituir por lo que corresponda ....
 
+   entradas.push_back(entrada);
+   return entradas.size() - 1;
 }
+
 // -----------------------------------------------------------------------------
 // construir una entrada y añadirla (al final)
 // objeto (copia solo puntero)
@@ -151,9 +176,13 @@ Matriz4f * NodoGrafoEscena::leerPtrMatriz( unsigned indice )
    // COMPLETAR: práctica 3: devolver puntero la matriz en ese índice
    //   (debe de dar error y abortar si no hay una matriz en esa entrada)
    // ........(sustituir 'return nullptr' por lo que corresponda)
-   return nullptr ;
+
+   assert(indice < entradas.size());
+   assert(entradas[indice].tipo == TipoEntNGE::transformacion);
+   assert(entradas[indice].matriz != nullptr);
 
 
+   return entradas[indice].matriz;
 }
 // -----------------------------------------------------------------------------
 // si 'centro_calculado' es 'false', recalcula el centro usando los centros

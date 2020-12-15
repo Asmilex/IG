@@ -169,6 +169,10 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
       // del objeto actual ('objeto'), se debe usar 'ProcesarTeclaAnimacion' si devuelve
       // 'true', forzar revisualizar escena (asignando valor a 'revisualizar_escena')
 
+      if (ProcesarTeclaAnimacion(objeto, key)) {
+         revisualizar_escena = true;
+      }
+
       return ; // finalizar la f.g.e, ya que si está la tecla A pulsada no se mira ninguna otra tecla.
    }
 
@@ -196,11 +200,11 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
          camara->desplRotarXY( 0.0, -cam_ab_incre_tecla );
          break;
 
-      case GLFW_KEY_KP_SUBTRACT :  // tecla '-' en el teclado numérico
+      case GLFW_KEY_0 :       // Sobreescrito -> 0
          camara->moverZ( +cam_d_incre_tecla );
          break;
 
-      case GLFW_KEY_KP_ADD :        // tecla '+' en el teclado numérico ¿?
+      case GLFW_KEY_1 :        // Sobreescrito -> 1
          camara->moverZ( -cam_d_incre_tecla );
          break;
 
@@ -280,7 +284,6 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
          cv.suavizar_aristas = ! cv.suavizar_aristas ;
          cout << "suavizar_aristas : " << (cv.suavizar_aristas ? "activado" : "desactivado") << endl << flush ;
          break ;
-
 
 
 
@@ -464,14 +467,15 @@ void Inicializar( int argc, char *argv[] )
 
    // crear los objetos y las escenas que forman, insertar escenas en 'escenas'
 
-   escenas.push_back( new Escena1() );
+   //escenas.push_back( new Escena1() );
 
    // COMPLETAR: Prácticas 2,3,4 y 5
    // hacer 'push_back' en el vector de escenas de instancias de 'Escena2',
    // 'Escena3', etc..
    // ......
 
-   escenas.push_back( new Escena2() );
+   //escenas.push_back( new Escena2() );
+   escenas.push_back( new Escena3() );
 
 
 }

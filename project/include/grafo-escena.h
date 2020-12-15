@@ -65,6 +65,7 @@ class NodoGrafoEscena : public Objeto3D
    protected:
    // COMPLETAR: práctica 3: definir variables y métodos privados del nodo
    // .......
+      std::vector<EntradaNGE> entradas;
 
    public:
 
@@ -78,9 +79,9 @@ class NodoGrafoEscena : public Objeto3D
    unsigned agregar( const EntradaNGE & entrada );
 
    // construir una entrada y añadirla (al final)
-   unsigned agregar( Objeto3D * pObjeto ); // objeto (copia solo puntero)
-   unsigned agregar( const Matriz4f & pMatriz ); // matriz (copia objeto)
-   unsigned agregar( Material * pMaterial ); // material (copia solo puntero)
+   unsigned agregar( Objeto3D * pObjeto );         // objeto (copia solo puntero)
+   unsigned agregar( const Matriz4f & pMatriz );   // matriz (copia objeto)
+   unsigned agregar( Material * pMaterial );       // material (copia solo puntero)
 
    // devuelve el puntero a la matriz en la i-ésima entrada
    Matriz4f * leerPtrMatriz( unsigned iEnt );
@@ -92,10 +93,6 @@ class NodoGrafoEscena : public Objeto3D
    // si 'centro_calculado' es 'false', recalcula el centro usando los centros
    // de los hijos (el punto medio de la caja englobante de los centros de hijos)
    virtual void calcularCentroOC() ;
-
-
-
-
 } ;
 
 #endif // GRAFO_ESCENA_HPP

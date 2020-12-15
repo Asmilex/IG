@@ -1,6 +1,9 @@
 # IG
 Prácticas de la asignatura Informática Gráfica
 
+## Exámenes
+Se pueden ver los exámenes en las distintas ramas. Los enunciados se encuentran en un README o en la carpeta ./img
+
 ## Práctica 1
 
 > En la primera práctica se completará el código de creación (constructor) de la clase Escena1, derivada de Escena. La clase Escena1 contendrá varios objetos de clases derivadas de MallaInd. Cada uno de esos objetos contiene las tablas de coordenadas de vértices, atributos e indices correspondientes a una malla indexada.

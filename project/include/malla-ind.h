@@ -103,4 +103,11 @@ class CuboColores : public MallaInd
       CuboColores();
 };
 
+class CPU_cooler_body : public MallaInd
+{
+   public:
+      CPU_cooler_body();
+};
+
+
 #endif
