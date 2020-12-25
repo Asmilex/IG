@@ -11,6 +11,8 @@
 #include <vector>         // usar std::vector
 #include "objeto3d.h"     // declaración de 'Objeto3D'
 #include "array-verts.h"  // clase 'ArrayVert'
+#include "grafo-escena.h"
+
 
 // ---------------------------------------------------------------------
 // clase para objetos gráficos genéricos
@@ -109,5 +111,10 @@ class CPU_cooler_body : public MallaInd
       CPU_cooler_body();
 };
 
+class NodoCubo24 : public NodoGrafoEscena{
+
+   public:
+      NodoCubo24();
+};
 
 #endif

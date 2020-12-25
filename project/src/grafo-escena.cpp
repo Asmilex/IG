@@ -21,6 +21,7 @@
 #include "ig-aux.h"
 #include "matrices-tr.h"
 #include "grafo-escena.h"
+#include "malla-ind.h"
 
 using namespace std ;
 
@@ -102,7 +103,7 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
             break;
 
          case TipoEntNGE::material:
-            if (cv.iluminacion) {      // REVIEW `&& !cv.modo_seleccion`?
+            if (cv.iluminacion  && !cv.modo_seleccion) {
                cv.material_act = entradas[i].material;
                cv.material_act->activar(*cv.cauce_act);
             }
@@ -242,3 +243,6 @@ bool NodoGrafoEscena::buscarObjeto
    // ni este nodo ni ningún hijo es el buscado: terminar
    return false ;
 }
+
+
+// ────────────────────────────────────────────────────────────────────────────────

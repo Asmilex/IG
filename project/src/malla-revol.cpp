@@ -24,30 +24,112 @@ void MallaRevol::inicializar (   const std::vector<Tupla3f> & perfil,      // ta
                                  const unsigned               num_copias  )// número de copias del perfil
 
 {
-   // COMPLETAR: Práctica 2: completar: creación de la malla....
+//
+// ─── CALCULO DE NORMALES ────────────────────────────────────────────────────────
+//
 
+   std::vector<Tupla3f> normales_aristas, vertices_aux;
+   Tupla3f normal, aux;
+
+   for (unsigned int i = 0; i < perfil.size()-1; i++) {
+      aux = (perfil[i+1] - perfil[i]);
+
+      normal(0) = aux(1);
+      normal(1) = -aux(0);
+      normal(2) = 0;
+
+      if (normal.lengthSq() > 0) {
+         normales_aristas.push_back(normal.normalized());
+      }
+      else {
+         normales_aristas.push_back(normal);
+      }
+   }
+
+   nor_ver.insert(nor_ver.begin(), perfil.size(), {0, 0, 0});
+
+   if (normales_aristas[0].lengthSq() != 0) {
+      nor_ver[0] = normales_aristas[0].normalized();
+   }
+
+   for (unsigned int i = 1; i < perfil.size()-1; i++) {
+      nor_ver[i] = normales_aristas[i] + normales_aristas[i-1];
+
+      if (nor_ver[i].lengthSq() != 0) {
+         nor_ver[i] = nor_ver[i].normalized();
+      }
+   }
+
+   if (normales_aristas[perfil.size()-2].lengthSq() != 0) {
+      nor_ver[perfil.size()-1] = normales_aristas[perfil.size()-2];
+   }
+
+//
+// ─── CALCULO DE COORDENADAS DE TEXTURA ──────────────────────────────────────────
+//
+
+   std::vector<float> d, t;
+   float den = 0;
+
+   for (unsigned int i = 0; i < perfil.size()-1; i++) {
+      d.push_back(
+         sqrt(  (perfil[i+1] - perfil[i]).lengthSq()  )
+      );
+
+      den += d[i];
+   }
+
+   t.push_back(0);
+
+   for (size_t i = 1; i < perfil.size(); i++) {
+      t.push_back(
+         t[i-1] + d[i-1]/den
+      );
+   }
+
+//
+// ─── P2 ─────────────────────────────────────────────────────────────────────────
+//
+
+
+   Tupla2f textura;
+
+
+   // COMPLETAR: Práctica 2: completar: creación de la malla....
    for (int i = 0; i < num_copias; i++) {
+
       for (int j = 0; j < perfil.size(); j++) {
          //                               Rotamos sobre el eje Y
          //                  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
          double angulo_grados = ((2*M_PI*i)/(num_copias - 1))*(180/M_PI);
-         vertices.push_back( MAT_Rotacion(angulo_grados, {0.0, 1.0, 0.0} ) * perfil[j] );
 
+         vertices.push_back(
+            MAT_Rotacion(angulo_grados, {0.0, 1.0, 0.0} ) * perfil[j]
+         );
+
+         nor_ver.push_back(
+            MAT_Rotacion(angulo_grados, {0, 1, 0}) * nor_ver[j]
+         );
+
+         textura(0) = (float)i/(num_copias - 1);
+         textura(1) = 1.0 - t[j];
+
+         cc_tt_ver.push_back(textura);
       }
    }
 
    size_t k = 0;
+
    for (int i = 0; i < num_copias - 1; i++) {
       for (int j = 0; j < perfil.size() - 1; j++) {
          k = i*perfil.size() + j;
 
-         Tupla3i nueva_tupla_1 = Tupla3i(k, k + perfil.size(),     k + perfil.size() + 1);
-         Tupla3i nueva_tupla_2 = Tupla3i(k, k + perfil.size() + 1, k + 1);
-
-         triangulos.push_back( nueva_tupla_1 );
-         triangulos.push_back( nueva_tupla_2 );
+         triangulos.push_back( Tupla3i(k, k + perfil.size(),     k + perfil.size() + 1) );
+         triangulos.push_back( Tupla3i(k, k + perfil.size() + 1, k + 1) );
       }
    }
+
+   calcularNormales();
 }
 
 // -----------------------------------------------------------------------------

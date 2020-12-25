@@ -245,10 +245,9 @@ void ColFuentesLuz::activar( Cauce & cauce )
       ejeZ = MAT_Rotacion(lightsource->lati, -1.0, 0.0, 0.0) * ejeZ;
 
       direccion.push_back(ejeZ);
-
-
    }
 
+   cauce.fijarFuentesLuz(colores, direccion);
 }
 
 // ---------------------------------------------------------------------
