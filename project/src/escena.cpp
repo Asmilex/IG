@@ -10,6 +10,7 @@
 #include "camara.h"
 #include "materiales-luces.h"
 #include "seleccion.h"
+#include "latapeones.h"
 
 #include "modelo-jer.h"
 
@@ -22,6 +23,8 @@ Escena::Escena()
 {
    // COMPLETAR: Práctica 4: inicializar 'col_fuentes' y 'material_ini'
    // ...
+   col_fuentes = new Col2Fuentes();
+   material_ini = new Material(0.1, 0.4, 0.4, 20);
 
 
    // COMPLETAR: Práctica 5: hacer 'push_back' de varias camaras perspectiva u ortogonales,
@@ -83,10 +86,18 @@ void Escena::visualizarGL( ContextoVis & cv )
       // * activar la colección de fuentes de la escena
       // * activar el material inicial
       // ....
+      cv.cauce_act->fijarEvalMIL(true);
 
+      col_fuentes->activar(*cauce);
+
+      if (material_ini != nullptr) {
+         cv.material_act = material_ini;
+         material_ini->activar(*cauce);
+      }
    }
    else // si la iluminación no está activada, deshabilitar MIL y texturas
-   {  cauce->fijarEvalMIL( false );
+   {
+      cauce->fijarEvalMIL( false );
       cauce->fijarEvalText( false );
    }
 
@@ -222,9 +233,8 @@ Escena3::Escena3() {
    objetos.push_back(new C());
 
    cout << "hecho." << endl << flush ;
-
-
 }
+
 
 // ----------------------------------------------------------------------
 // COMPLETAR: Práctica 4
@@ -232,6 +242,16 @@ Escena3::Escena3() {
 // los objetos que se indican en los guiones de las práctica 4
 // .......
 
+Escena4::Escena4() {
+   using namespace std;
+   cout << "Creando objetos de escena 4 .... " << flush;
+
+   objetos.push_back( new Varias_latas_peones() );
+   objetos.push_back( new NodoCubo24() );
+
+
+   cout << "hecho." << endl << flush ;
+}
 
 
 // ----------------------------------------------------------------------
