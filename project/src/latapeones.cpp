@@ -83,8 +83,8 @@ Peon_blanco::Peon_blanco() {
     ponerColor({1.0, 1.0, 1.0});
 
     agregar( MAT_Traslacion(0, 1.4, 0));
-    agregar( new Material(0.1, 0.8, 0.2, 15) );
-    agregar(new MallaRevolPLY("../recursos/plys/peon.ply",50));
+    agregar( new Material(0.1, 0.8, 0.1, 15 ) );
+    agregar( new MallaRevolPLY("../recursos/plys/peon.ply", 50));
 
     ponerNombre("Peon blanco");
 }

@@ -93,8 +93,9 @@ void Textura::activar( Cauce & cauce  )
 {
    // COMPLETAR: práctica 4: enviar la textura a la GPU (solo la primera vez) y activarla
    // .......
-   if (ident_textura == -1) {
+   if (!enviada) {
       enviar();
+      enviada = true;
    }
 
    cauce.fijarEvalText(true, ident_textura);
@@ -156,6 +157,9 @@ void Material::activar( Cauce & cauce )
 
    if (textura != nullptr) {
       textura->activar(cauce);
+   }
+   else {
+      cauce.fijarEvalText(false);
    }
 
    cauce.fijarParamsMIL(
