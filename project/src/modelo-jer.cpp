@@ -1,10 +1,11 @@
 #include "modelo-jer.h"
 #include "malla-ind.h"
 #include "malla-revol.h"
+#include "auxiliares.h"
 
 C::C() {
     agregar(MAT_Rotacion(40, 1, 0, 0));
-    
+
     unsigned ind_rot_mobo = agregar (MAT_Rotacion(0, 0, 1, 0));
     agregar(new Motherboard(traslacion_RAM1, traslacion_RAM2, CPU_fan_rotator));
     mobo_rotator = leerPtrMatriz(ind_rot_mobo);
@@ -71,6 +72,7 @@ Motherboard::Motherboard(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_RAM
 
     agregar( new DIMM_slot() );
 
+
     // Deshacer este posicionamiento para mayor comodidad
     agregar(  MAT_Inversa(traslacion_slot2)
             * MAT_Inversa(escala_slot)
@@ -126,6 +128,11 @@ RAM::RAM() {
     agregar( new RAM_pinout() );
 
     ponerColor(Hex_a_tupla(0x2C2E31));
+
+    ponerIdentificador(generar_ident_unico());
+    ponerNombre("Motherboard");
+
+
 }
 
 RAM_pinout::RAM_pinout() {
@@ -135,6 +142,11 @@ RAM_pinout::RAM_pinout() {
     agregar( new Cubo() );
 
     ponerColor(Hex_a_tupla(0x040609));
+
+    ponerIdentificador(generar_ident_unico());
+    ponerNombre("RAM pinout");
+
+
 }
 
 DIMM_slot::DIMM_slot() {
@@ -154,6 +166,9 @@ DIMM_slot::DIMM_slot() {
     agregar(clip);
 
     ponerColor(Hex_a_tupla(0x1B1515));
+
+    ponerIdentificador(generar_ident_unico());
+    ponerNombre("DIMM slot");
 }
 
 RAM_animator::RAM_animator(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_RAM2) {
@@ -184,6 +199,9 @@ CPU_cooler::CPU_cooler(Matriz4f * &rotacion) {
     agregar( new CPU_cooler_fan_system() );
 
     rotacion = leerPtrMatriz(ind_rot);
+
+    ponerIdentificador(generar_ident_unico());
+    ponerNombre("CPU cooler");
 }
 
 
@@ -217,12 +235,18 @@ CPU_cooler_fan_system::CPU_cooler_fan_system() {
     );
 
     agregar( new CPU_cooler_blade() );
+
+    ponerIdentificador(generar_ident_unico());
+    ponerNombre("CPU fan system");
 }
 
 
 CPU_cooler_stem::CPU_cooler_stem() {
     agregar (new Cilindro(30, 30));
     ponerColor(Hex_a_tupla(0x181516));
+
+    ponerIdentificador(generar_ident_unico());
+    ponerNombre("CPU cooler stem");
 }
 
 
@@ -234,6 +258,9 @@ CPU_cooler_blade::CPU_cooler_blade() {
     Cubo * blade = new Cubo();
     blade->ponerColor(Hex_a_tupla(0xE6E6E6));
     agregar( blade );
+
+    ponerIdentificador(generar_ident_unico());
+    ponerNombre("CPU cooler blade");
 }
 
 // ────────────────────────────────────────────────────────────────────────────────
@@ -255,22 +282,10 @@ PCIE_port::PCIE_port() {
 
     ponerColor(Hex_a_tupla(0x1B1515));
 
+    ponerIdentificador(generar_ident_unico());
+    ponerNombre("PCIe port");
+
 }
 //
 // ──────────────────────────────────────────────────────────────────── OTROS ─────
 //
-
-Tupla3f RGB_a_tupla(int R, int G, int B) {
-    Tupla3f colores (R/255, G/255, B/255);
-    return colores;
-}
-
-Tupla3f Hex_a_tupla (int hexValue) {
-    Tupla3f rgbColor;
-
-    rgbColor(R) = ((hexValue >> 16) & 0xFF) / 255.0;  // Extract the RR byte
-    rgbColor(G) = ((hexValue >> 8) & 0xFF) / 255.0;   // Extract the GG byte
-    rgbColor(B) = ((hexValue) & 0xFF) / 255.0;        // Extract the BB byte
-
-    return rgbColor;
-}

@@ -10,6 +10,7 @@
 #include "tuplasg.h"
 #include "malla-ind.h"   // declaración de 'ContextoVis'
 #include "lector-ply.h"
+#include "auxiliares.h"
 #include <random>
 
 
@@ -225,6 +226,8 @@ Cubo::Cubo()
       } ;
 
       calcularNormales();
+
+      ponerIdentificador(generar_ident_unico());
 }
 
 //
@@ -251,6 +254,8 @@ Cubo::Cubo()
 
       ponerColor({ RNG(0, 1), RNG(0, 1), RNG(0, 1) });
       calcularNormales();
+
+      ponerIdentificador(generar_ident_unico());
    }
 
 //
@@ -288,6 +293,8 @@ Cubo::Cubo()
       for (int i = 0; i < vertices.size(); i++) {
          col_ver.push_back(   { RNG(0, 1), RNG(0, 1), RNG(0, 1) } );
       }
+
+      ponerIdentificador(generar_ident_unico());
    }
 
 
@@ -379,6 +386,9 @@ Cubo::Cubo()
       }
 
       ponerColor({24.0/255.0, 21.0/255.0, 22.0/255.0});
+
+      ponerIdentificador(generar_ident_unico());
+      ponerNombre("CPU cooler body");
    };
 
 // ────────────────────────────────────────────────────────────────────────────────
@@ -432,6 +442,7 @@ Cubo::Cubo()
       };
 
       calcularNormales();
+      ponerIdentificador(generar_ident_unico());
    }
 
 
@@ -442,4 +453,5 @@ Cubo::Cubo()
       agregar(new Cubo24() );
 
       ponerNombre("Cubo 24 vertices");
+      ponerIdentificador(generar_ident_unico());
    }

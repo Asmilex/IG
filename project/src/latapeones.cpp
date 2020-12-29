@@ -2,6 +2,7 @@
 #include "malla-revol.h"
 #include "matrices-tr.h"
 #include "latapeones.h"
+#include "auxiliares.h"
 
 // ────────────────────────────────────────────────────────────────────────────────
 
@@ -10,7 +11,7 @@ Lata::Lata (const std::string & textura) {
     agregar(new Tapa_superior_lata());
     agregar(new Cuerpo_lata(textura));
 
-    ponerIdentificador(-1);
+    ponerIdentificador(generar_ident_unico());
     ponerNombre("Lata");
 }
 
@@ -49,18 +50,21 @@ Cuerpo_lata::Cuerpo_lata(const std::string & fichero) {
 Lata_Pepsi::Lata_Pepsi(){
     agregar(new Lata("../recursos/imgs/lata-pepsi.jpg"));
 
+    ponerIdentificador(generar_ident_unico());
     ponerNombre("Lata de Pepsi");
 }
 
 Lata_Cocacola::Lata_Cocacola(){
     agregar(new Lata("../recursos/imgs/lata-coke.jpg"));
 
+    ponerIdentificador(generar_ident_unico());
     ponerNombre("Lata de Coca-Cola");
 }
 
 Latazo_UGR::Latazo_UGR(){
     agregar(new Lata("../recursos/imgs/window-icon.jpg"));
 
+    ponerIdentificador(generar_ident_unico());
     ponerNombre("Lata de la UGR");
 }
 
@@ -75,6 +79,7 @@ Peon_madera::Peon_madera() {
     agregar( new Material(tex, 0.3, 0.4, 0.4, 20) );
     agregar(new MallaRevolPLY("../recursos/plys/peon.ply",50));
 
+    ponerIdentificador(generar_ident_unico());
     ponerNombre("Peon de Madera");
 }
 
@@ -86,6 +91,7 @@ Peon_blanco::Peon_blanco() {
     agregar( new Material(0.1, 0.8, 0.1, 15 ) );
     agregar( new MallaRevolPLY("../recursos/plys/peon.ply", 50));
 
+    ponerIdentificador(generar_ident_unico());
     ponerNombre("Peon blanco");
 }
 
@@ -97,6 +103,7 @@ Peon_negro::Peon_negro() {
     agregar( new Material(0.1, 0.1, 0.8, 20) );
     agregar(new MallaRevolPLY("../recursos/plys/peon.ply",50));
 
+    ponerIdentificador(generar_ident_unico());
     ponerNombre("Peon negro");
 }
 
