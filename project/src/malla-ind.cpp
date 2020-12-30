@@ -157,9 +157,14 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    //   ** diferido (con un VAO)     : usar método 'visualizarGL_MD_VAO' de 'ArrayVerts'
    // (en cualquier caso hay que pasar como parámetro el tipo de primitiva adecuada a una malla de triángulos).
    // .....
-  /*  if (cv.visualizar_normales) {
-
-   } */
+   if (cv.visualizar_normales && nor_ver.size() > 0) {
+      for (size_t i = 0; i < nor_ver.size(); i++) {
+         glBegin(GL_LINES);
+            glVertex3f(vertices[i](0), vertices[i](1), vertices[i](2));
+            glVertex3f(vertices[i](0) + nor_ver[i](0), vertices[i](1) + nor_ver[i](1), vertices[i](2) + nor_ver[i](2));
+         glEnd();
+      }
+   }
 
    if (cv.modo_envio == ModosEnvio::inmediato_begin_end) {
       array_verts->visualizarGL_MI_BVE(GL_TRIANGLES);
