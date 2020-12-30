@@ -308,6 +308,11 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          // .....
 
          org_polares     = org_polares + Tupla3f({da/smooth_value, db/smooth_value, 0.0});
+
+         // Eliminar spinning de la cámara en la posición vertical (ya que no tiene ningún sentido)
+         org_polares(1) = org_polares(1) >  M_PI/2 - 0.001 ?  M_PI/2 - 0.001 : org_polares(1);
+         org_polares(1) = org_polares(1) < -M_PI/2 + 0.001 ? -M_PI/2 + 0.001 : org_polares(1);
+
          org_cartesianas = Cartesianas(org_polares);
 
          actualizarEjesMCV();
@@ -325,7 +330,12 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          // 5. actualizar los ejes del MCV (actualizarEjesMCV)
          // .....
 
-               org_polares     = org_polares + Tupla3f({da/smooth_value, db/smooth_value, 0.0});
+         org_polares = org_polares + Tupla3f({da/smooth_value, db/smooth_value, 0.0});
+
+         // Eliminar spinning de la cámara en la posición vertical (ya que no tiene ningún sentido)
+         org_polares(1) = org_polares(1) >  M_PI/2 - 0.001 ?  M_PI/2 - 0.001 : org_polares(1);
+         org_polares(1) = org_polares(1) < -M_PI/2 + 0.001 ? -M_PI/2 + 0.001 : org_polares(1);
+
          auto  n_prima         = Cartesianas(org_polares);
                punto_atencion  = punto_atencion + (n_prima - org_cartesianas);
                org_cartesianas = n_prima;

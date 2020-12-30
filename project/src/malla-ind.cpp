@@ -107,7 +107,6 @@ void MallaInd::calcularNormales()
          normal_vertice = normal_vertice.normalized();
       }
    }
-
 }
 
 
