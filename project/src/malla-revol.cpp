@@ -132,8 +132,6 @@ void MallaRevol::inicializar (   const std::vector<Tupla3f> & perfil,      // ta
          triangulos.push_back( Tupla3i(k, k + perfil.size() + 1, k + 1) );
       }
    }
-
-   calcularNormales();
 }
 
 // -----------------------------------------------------------------------------
