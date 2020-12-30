@@ -285,11 +285,11 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
          cout << "suavizar_aristas : " << (cv.suavizar_aristas ? "activado" : "desactivado") << endl << flush ;
          break ;
 
-
-
-
       // COMPLETAR; Práctica 5. conmutar 'cv.visualizar_fbo' con la tecla 'Y'
-
+      case GLFW_KEY_Y:
+         cv.visualizar_fbo = !cv.visualizar_fbo;
+         cout << "Visualizar fbo: " << (cv.visualizar_fbo? "activado" : "desactivado") << endl;
+         break;
 
       case GLFW_KEY_T :
          imprimir_tiempos = ! imprimir_tiempos ;
@@ -467,6 +467,7 @@ void Inicializar( int argc, char *argv[] )
 
    // crear los objetos y las escenas que forman, insertar escenas en 'escenas'
 
+   escenas.push_back( new Escena5() );
    escenas.push_back( new Escena4() );
    escenas.push_back( new Escena1() );
 
