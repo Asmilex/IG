@@ -145,7 +145,7 @@ class Camara3Modos : public CamaraInteractiva
 
    Camara3Modos( const bool perspectiva_ini,
                  const Tupla3f & origen_ini, const float ratio_vp_ini,
-                 const Tupla3f & punto_aten_ini, const float fovy_grad_ini = 70.0 ) ;
+                 const Tupla3f & punto_aten_ini, const float fovy_grad_ini = 90.0 ) ;
 
    // desplazar o rotar la cámara en horizontal 'dx' unidades y en vertical 'dy' unidades
    // (en horizontal y en vertical aquí se entiende relativo al marco de camara)
