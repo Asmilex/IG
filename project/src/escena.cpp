@@ -252,6 +252,16 @@ Escena4::Escena4() {
    cout << "hecho." << endl << flush ;
 }
 
+Escena5::Escena5() {
+   using namespace std;
+   cout << "Creando objetos de escena 5 .... " << flush;
+
+   objetos.push_back( new Varias_latas_peones() );
+
+
+   cout << "hecho." << endl << flush ;
+}
+
 
 // ----------------------------------------------------------------------
 // COMPLETAR: Práctica 5
