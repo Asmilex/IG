@@ -111,6 +111,9 @@ Motherboard::Motherboard(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_RAM
 
     // Guardar matrices de movimiento
     ponerColor( Hex_a_tupla(0x636060) );
+    ponerIdentificador(generar_ident_unico());
+    ponerNombre("Motherboard");
+
 }
 
 // ────────────────────────────────────────────────────────────────────────────────
@@ -130,7 +133,7 @@ RAM::RAM() {
     ponerColor(Hex_a_tupla(0x2C2E31));
 
     ponerIdentificador(generar_ident_unico());
-    ponerNombre("Motherboard");
+    ponerNombre("RAM");
 
 
 }
@@ -143,7 +146,7 @@ RAM_pinout::RAM_pinout() {
 
     ponerColor(Hex_a_tupla(0x040609));
 
-    ponerIdentificador(generar_ident_unico());
+    ponerIdentificador(-1);
     ponerNombre("RAM pinout");
 
 
@@ -167,7 +170,7 @@ DIMM_slot::DIMM_slot() {
 
     ponerColor(Hex_a_tupla(0x1B1515));
 
-    ponerIdentificador(generar_ident_unico());
+    ponerIdentificador(-1);
     ponerNombre("DIMM slot");
 }
 
@@ -184,6 +187,7 @@ RAM_animator::RAM_animator(Matriz4f * &traslacion_RAM1, Matriz4f * &traslacion_R
     unsigned ind_trasla_RAM2 = agregar(MAT_Traslacion(0, 1, 0));
     traslacion_RAM2 = leerPtrMatriz(ind_trasla_RAM2);
 
+    ponerIdentificador(-1);
     agregar( new RAM() );
 }
 
@@ -236,7 +240,7 @@ CPU_cooler_fan_system::CPU_cooler_fan_system() {
 
     agregar( new CPU_cooler_blade() );
 
-    ponerIdentificador(generar_ident_unico());
+    ponerIdentificador(-1);
     ponerNombre("CPU fan system");
 }
 
@@ -245,7 +249,7 @@ CPU_cooler_stem::CPU_cooler_stem() {
     agregar (new Cilindro(30, 30));
     ponerColor(Hex_a_tupla(0x181516));
 
-    ponerIdentificador(generar_ident_unico());
+    ponerIdentificador(-1);
     ponerNombre("CPU cooler stem");
 }
 
@@ -259,7 +263,7 @@ CPU_cooler_blade::CPU_cooler_blade() {
     blade->ponerColor(Hex_a_tupla(0xE6E6E6));
     agregar( blade );
 
-    ponerIdentificador(generar_ident_unico());
+    ponerIdentificador(-1);
     ponerNombre("CPU cooler blade");
 }
 
@@ -282,7 +286,7 @@ PCIE_port::PCIE_port() {
 
     ponerColor(Hex_a_tupla(0x1B1515));
 
-    ponerIdentificador(generar_ident_unico());
+    ponerIdentificador(-1);
     ponerNombre("PCIe port");
 
 }

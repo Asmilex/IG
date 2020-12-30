@@ -387,7 +387,7 @@ Cubo::Cubo()
 
       ponerColor({24.0/255.0, 21.0/255.0, 22.0/255.0});
 
-      ponerIdentificador(generar_ident_unico());
+      ponerIdentificador(-1);
       ponerNombre("CPU cooler body");
    };
 

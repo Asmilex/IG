@@ -209,7 +209,27 @@ void NodoGrafoEscena::calcularCentroOC()
    //    en coordenadas de objeto (hay que hacerlo recursivamente)
    //   (si el centro ya ha sido calculado, no volver a hacerlo)
    // ........
+   if (!centro_calculado) {
+      Matriz4f matriz      = MAT_Ident();
+      Tupla3f  suma        = {0, 0, 0};
+      float    num_centros = 0;
 
+      for (auto hijo: entradas) {
+         if (hijo.tipo == TipoEntNGE::objeto) {
+            hijo.objeto->calcularCentroOC();
+            suma = suma + (matriz * hijo.objeto->leerCentroOC());
+            num_centros++;
+         }
+         else if (hijo.tipo == TipoEntNGE::transformacion) {
+            matriz = matriz * (hijo,matriz);
+         }
+      }
+
+      Tupla3f centro = suma/num_centros;
+      ponerCentroOC(centro);
+
+      centro_calculado = true;
+   }
 }
 // -----------------------------------------------------------------------------
 // método para buscar un objeto con un identificador y devolver un puntero al mismo
@@ -228,16 +248,36 @@ bool NodoGrafoEscena::buscarObjeto
    // Se deben de dar estos pasos:
 
    // 1. calcula el centro del objeto, (solo la primera vez)
-   // ........
+   calcularCentroOC();
 
 
    // 2. si el identificador del nodo es el que se busca, ya está (terminar)
-   // ........
+   if (leerIdentificador() == ident_busc) {
+      centro_wc = mmodelado * leerCentroOC();
+
+      if (objeto == nullptr) {
+         cout << "\t Identificador encontrado pero tiene puntero asociado nulo\n";
+      }
+      *objeto = this;
+      return true;
+   }
 
 
    // 3. El nodo no es el buscado: buscar recursivamente en los hijos
    //    (si alguna llamada para un sub-árbol lo encuentra, terminar y devolver 'true')
-   // ........
+   Matriz4f matriz = mmodelado;
+
+
+   for (auto hijo: entradas) {
+      if (hijo.tipo == TipoEntNGE::objeto) {
+         if (hijo.objeto->buscarObjeto(ident_busc, matriz, objeto, centro_wc)) {
+            return true;
+         }
+      }
+      else if (hijo.tipo == TipoEntNGE::transformacion) {
+         matriz = matriz * (*hijo.matriz);
+      }
+   }
 
 
    // ni este nodo ni ningún hijo es el buscado: terminar
