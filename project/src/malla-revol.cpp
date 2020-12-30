@@ -31,6 +31,7 @@ void MallaRevol::inicializar (   const std::vector<Tupla3f> & perfil,      // ta
    std::vector<Tupla3f> normales_aristas, vertices_aux;
    Tupla3f normal, aux;
 
+   // Pág 49, Cálculo de normales, 1.
    for (unsigned int i = 0; i < perfil.size()-1; i++) {
       aux = (perfil[i+1] - perfil[i]);
 
@@ -46,23 +47,24 @@ void MallaRevol::inicializar (   const std::vector<Tupla3f> & perfil,      // ta
       }
    }
 
-   nor_ver.insert(nor_ver.begin(), perfil.size(), {0, 0, 0});
+   // Pág 49, Cálculo de normales, 2. NOTE hay un fallo creo. v0 se refiera a n0, igual que vn-1.
+   nor_ver.clear();
+   nor_ver.push_back(normales_aristas[0]);
 
    if (normales_aristas[0].lengthSq() != 0) {
       nor_ver[0] = normales_aristas[0].normalized();
    }
 
-   for (unsigned int i = 1; i < perfil.size()-1; i++) {
-      nor_ver[i] = normales_aristas[i] + normales_aristas[i-1];
+   for (unsigned int i = 1; i <= perfil.size() - 2; i++) {
+      nor_ver.push_back(normales_aristas[i-1] + normales_aristas[i]);
 
-      if (nor_ver[i].lengthSq() != 0) {
-         nor_ver[i] = nor_ver[i].normalized();
+      if (nor_ver.back().lengthSq() != 0) {
+         nor_ver.back() = nor_ver.back().normalized();
       }
    }
 
-   if (normales_aristas[perfil.size()-2].lengthSq() != 0) {
-      nor_ver[perfil.size()-1] = normales_aristas[perfil.size()-2];
-   }
+   nor_ver.push_back(normales_aristas[normales_aristas.size()-1]);
+
 
 //
 // ─── CALCULO DE COORDENADAS DE TEXTURA ──────────────────────────────────────────
@@ -107,9 +109,11 @@ void MallaRevol::inicializar (   const std::vector<Tupla3f> & perfil,      // ta
             MAT_Rotacion(angulo_grados, {0.0, 1.0, 0.0} ) * perfil[j]
          );
 
-         nor_ver.push_back(
-            MAT_Rotacion(angulo_grados, {0, 1, 0}) * nor_ver[j]
-         );
+         if (i != 0) {
+            nor_ver.push_back(
+               MAT_Rotacion(angulo_grados, {0, 1, 0}) * nor_ver[j]
+            );
+         }
 
          textura(0) = (float)i/(num_copias - 1);
          textura(1) = 1.0 - t[j];

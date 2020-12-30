@@ -92,19 +92,21 @@ void MallaInd::calcularNormales()
    // se debe invocar en primer lugar 'calcularNormalesTriangulos'
    // .......
 
-   calcularNormalesTriangulos();
+   if (nor_ver.size() == 0) {
+      calcularNormalesTriangulos();
 
-   nor_ver.insert(nor_ver.begin(), vertices.size(), {0, 0, 0});
+      nor_ver.insert(nor_ver.begin(), vertices.size(), {0, 0, 0});
 
-   for (unsigned int i = 0; i < triangulos.size(); i++) {
-      nor_ver[triangulos[i](0)] = nor_ver[triangulos[i](0)] + nor_tri[i];
-      nor_ver[triangulos[i](1)] = nor_ver[triangulos[i](1)] + nor_tri[i];
-      nor_ver[triangulos[i](2)] = nor_ver[triangulos[i](2)] + nor_tri[i];
-   }
+      for (unsigned int i = 0; i < triangulos.size(); i++) {
+         nor_ver[triangulos[i](0)] = nor_ver[triangulos[i](0)] + nor_tri[i];
+         nor_ver[triangulos[i](1)] = nor_ver[triangulos[i](1)] + nor_tri[i];
+         nor_ver[triangulos[i](2)] = nor_ver[triangulos[i](2)] + nor_tri[i];
+      }
 
-   for (auto & normal_vertice: nor_ver) {
-      if (normal_vertice.lengthSq() > 0) {
-         normal_vertice = normal_vertice.normalized();
+      for (auto & normal_vertice: nor_ver) {
+         if (normal_vertice.lengthSq() > 0) {
+            normal_vertice = normal_vertice.normalized();
+         }
       }
    }
 }
@@ -157,6 +159,9 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    //   ** diferido (con un VAO)     : usar método 'visualizarGL_MD_VAO' de 'ArrayVerts'
    // (en cualquier caso hay que pasar como parámetro el tipo de primitiva adecuada a una malla de triángulos).
    // .....
+  /*  if (cv.visualizar_normales) {
+
+   } */
 
    if (cv.modo_envio == ModosEnvio::inmediato_begin_end) {
       array_verts->visualizarGL_MI_BVE(GL_TRIANGLES);
