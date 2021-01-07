@@ -121,6 +121,10 @@ Material::Material( const float p_k_amb, const float p_k_dif,
 Material::Material( Textura * p_textura, const float p_k_amb, const float p_k_dif,
                     const float p_k_pse, const float p_exp_pse )
 {
+   if (p_k_pse <= 0) {
+      cout << "Warning: componente pseudoespecular menor que 0\n";
+   }
+
    textura  = p_textura ;  assert( textura != nullptr );
    k_amb    = p_k_amb ;
    k_dif    = p_k_dif ;

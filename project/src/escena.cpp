@@ -108,6 +108,8 @@ void Escena::visualizarGL( ContextoVis & cv )
 
 
    // si hay un FBO, dibujarlo (opcional...)
+   if ( cv.visualizar_normales && !cv.modo_seleccion )
+      visualizar_normales( cv );
 }
 
 
@@ -137,6 +139,32 @@ void Escena::siguienteObjeto()
    using namespace std ;
    cout << "Objeto actual cambiado a: " << objetoActual()->leerNombre()
         << " (" << (ind_objeto_actual+1) << "/" << objetos.size() << ")." << endl  ;
+}
+
+void Escena::visualizar_normales(ContextoVis & cv) {
+   assert( cv.cauce_act != nullptr );
+
+   // recuperar el objeto raiz de esta escena y comprobar que está ok.
+   bool     ilum_ant = cv.iluminacion ;
+   Objeto3D * objeto = objetos[ind_objeto_actual] ; assert( objeto != nullptr );
+
+   // configurar el cauce:
+   cv.cauce_act->fijarEvalMIL( false );
+   cv.cauce_act->fijarEvalText( false );
+   cv.cauce_act->fijarModoSombrPlano( true ); // sombreado plano
+   glLineWidth( 1.5 ); // ancho de líneas (se queda puesto así)
+   glColor4f( 1.0, 0.7, 0.4, 1.0 ); // color de las normales
+
+   // configurar el contexto de visualizacion
+   cv.visualizando_normales = true ;   // hace que MallaInd::visualizarGL visualize las normales.
+   cv.iluminacion           = false ;
+
+   // visualizar objeto actual
+   objetos[ind_objeto_actual]->visualizarGL( cv );
+
+   // restaurar atributos cambiados en el contexto de visualización
+   cv.visualizando_normales = false ;
+   cv.iluminacion           = ilum_ant ;
 }
 
 // -----------------------------------------------------------------------------------------------

@@ -336,9 +336,10 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          org_polares(1) = org_polares(1) >  M_PI/2 - 0.001 ?  M_PI/2 - 0.001 : org_polares(1);
          org_polares(1) = org_polares(1) < -M_PI/2 + 0.001 ? -M_PI/2 + 0.001 : org_polares(1);
 
-         auto  n_prima         = Cartesianas(org_polares);
-               punto_atencion  = punto_atencion + (n_prima - org_cartesianas);
-               org_cartesianas = n_prima;
+         auto n_prima = Cartesianas(org_polares);
+
+         punto_atencion  = punto_atencion + (n_prima - org_cartesianas);
+         org_cartesianas = n_prima;
 
          actualizarEjesMCV();
 

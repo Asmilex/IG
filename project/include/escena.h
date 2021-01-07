@@ -55,6 +55,7 @@ class Escena
    // devuelve un puntero a la colección de fuentes actual
    ColFuentesLuz * colFuentes();
 
+   void visualizar_normales(ContextoVis & cv);
 
 
    protected:

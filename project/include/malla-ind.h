@@ -32,6 +32,9 @@ class MallaInd : public Objeto3D
       std::vector<Tupla3f> nor_tri ;  // normales de triangulos
       std::vector<Tupla2f> cc_tt_ver ; // coordenadas de textura de los vértices
 
+      ArrayVertices * array_verts_normales = nullptr;
+      std::vector<Tupla3f> segmentos_normales;
+
 
       // array de vértices con información de tablas para visualizar
       // (se crea bajo demanda: la primera vez que se llama a 'visualizarGL')
@@ -43,7 +46,9 @@ class MallaInd : public Objeto3D
       void calcularNormales();
 
       // calculo de las normales de triángulos (solo si no están creadas ya)
-      void calcularNormalesTriangulos() ;
+      void calcularNormalesTriangulos();
+
+      void visualizar_normales();
 
 
 

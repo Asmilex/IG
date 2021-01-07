@@ -150,6 +150,9 @@ void MallaInd::visualizarGL( ContextoVis & cv )
       }
    }
 
+   if (cv.visualizando_normales) {
+      visualizar_normales();
+   }
 
    // COMPLETAR: práctica 1: visualizar según el modo (en 'cv.modo_envio')
    //   ** inmediato begin/end       : usar método 'visualizarGL_MI_BVE' de 'ArrayVerts'
@@ -157,6 +160,10 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    //   ** diferido (con un VAO)     : usar método 'visualizarGL_MD_VAO' de 'ArrayVerts'
    // (en cualquier caso hay que pasar como parámetro el tipo de primitiva adecuada a una malla de triángulos).
    // .....
+   /*
+   NOTE: Código que yo usaba para visualizar las normales. Dejo atrás esto a favor de la implementación
+   propuesta por el profesor
+
    if (cv.visualizar_normales && nor_ver.size() > 0) {
       for (size_t i = 0; i < nor_ver.size(); i++) {
          glBegin(GL_LINES);
@@ -165,7 +172,7 @@ void MallaInd::visualizarGL( ContextoVis & cv )
          glEnd();
       }
    }
-
+ */
    if (cv.modo_envio == ModosEnvio::inmediato_begin_end) {
       array_verts->visualizarGL_MI_BVE(GL_TRIANGLES);
    }
@@ -181,8 +188,25 @@ void MallaInd::visualizarGL( ContextoVis & cv )
 }
 
 
-// *****************************************************************************
+void MallaInd::visualizar_normales() {
+   if (nor_ver.size() == 0) {
+      std::cout << "Advertencia: intentando dibujar normales de una malla que no tiene tabla (" << leerNombre() << ")." << std::endl ;
+      return;
+   }
 
+   if (array_verts_normales == nullptr) {
+      for (unsigned i = 0; i < vertices.size(); i++) {
+         segmentos_normales.push_back( vertices[i] );
+         segmentos_normales.push_back( vertices[i]+ 0.35f*(nor_ver[i]) );
+      }
+
+      array_verts_normales = new ArrayVertices( GL_FLOAT, 3, segmentos_normales.size(), segmentos_normales.data() );
+   }
+
+   array_verts_normales->visualizarGL_MI_DAE( GL_LINES );
+   CError();
+
+}
 
 // ****************************************************************************
 // Clase 'MallaPLY'
