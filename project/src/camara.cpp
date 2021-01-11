@@ -275,7 +275,7 @@ Camara3Modos::Camara3Modos( const bool perspectiva_ini,
 
    assert( 5.0 < fovy_grad_ini && fovy_grad_ini < 178.0 );
    assert( 0.0 <= ratio_vp_ini );
-   const float d_sq = (punto_aten_ini-origen_ini).lengthSq() ; assert( 0.0 < d_sq );
+   const float d_sq = (punto_aten_ini - origen_ini).lengthSq() ; assert( 0.0 < d_sq );
 
    // inicializar parámetros con valores distintos a los valores por defecto:
    perspectiva     = perspectiva_ini ;
@@ -338,7 +338,7 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
 
          auto n_prima = Cartesianas(org_polares);
 
-         punto_atencion  = punto_atencion + (n_prima - org_cartesianas);
+         punto_atencion  = punto_atencion - (n_prima - org_cartesianas);
          org_cartesianas = n_prima;
 
          actualizarEjesMCV();
