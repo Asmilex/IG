@@ -320,7 +320,7 @@ Cubo::Cubo()
 
          {0,6,4}, {0,2,6}, // Z-
          {1,5,7}, {1,7,3}  // Z+ (+1)
-      } ;
+      };
 
       for (int i = 0; i < vertices.size(); i++) {
          col_ver.push_back(   { RNG(0, 1), RNG(0, 1), RNG(0, 1) } );

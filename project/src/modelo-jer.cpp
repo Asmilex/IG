@@ -317,7 +317,7 @@ Sistema_cilindros::Sistema_cilindros(float radio, int copias) {
 }
 
 Cilindro_alt::Cilindro_alt(int n) {
-    Textura * tex = new Textura("../recursos/imgs/window-icon.jpg");
+    Textura * tex = new Textura("../recursos/imgs/jpog.jpg");
     agregar( new Material(tex, 0.3, 0.1, 0.1, 4));
     agregar(new MallaCil(n));
 
