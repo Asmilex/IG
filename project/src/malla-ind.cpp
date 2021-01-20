@@ -487,3 +487,40 @@ Cubo::Cubo()
       ponerNombre("Cubo 24 vertices");
       ponerIdentificador(generar_ident_unico());
    }
+
+MallaCil::MallaCil(const int n){
+	for(int i = 0; i <= n; i++) {
+      const float f = float(i)/float(n),
+            ang     = 2.0*M_PI*f,
+            vx      = std::cos(ang),
+            vz      = std::sin(ang);
+
+      //Vertice 3*i(lateral del cilindro,inferior)
+      vertices.push_back({vx,0.0,vz});
+      nor_ver.push_back({vx,0.0,vz});
+      cc_tt_ver.push_back({-f, 1});
+
+      //Vertice 3*i+1(lateral del cilindro,superior)
+      vertices.push_back({vx,1.0,vz});
+      nor_ver.push_back({vx,0.0,vz});
+      cc_tt_ver.push_back({-f, 0});
+
+      //vertice 3*i+2(tapa, es el anterior vertice duplicado)
+      vertices.push_back({vx, 1.0, vz});
+      nor_ver.push_back({0.0, 1.0, 0.0});
+      cc_tt_ver.push_back(
+         Tupla2f( 0.5 + vx/2,  0.5 + vz/2)
+      );//Revisar
+
+      //triangulos
+      if (i < n) {
+         triangulos.push_back({3*i,       3*i + 1,   3*(i + 1)});
+         triangulos.push_back({3*(i + 1), 3*i + 1,   3*(i + 1) + 1});
+         triangulos.push_back({3*i + 2,   3*(n + 1), 3*(i + 1) + 2});
+      }
+   }
+	//vertice 3*(n+1)(centro de la tapa superior)
+	vertices.push_back({0.0,1.0,0.0});
+	nor_ver.push_back({0,1,0});
+	cc_tt_ver.push_back({0.5,0.5});
+}

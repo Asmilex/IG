@@ -293,3 +293,42 @@ PCIE_port::PCIE_port() {
 //
 // ──────────────────────────────────────────────────────────────────── OTROS ─────
 //
+
+Sistema_cilindros::Sistema_cilindros(float radio, int copias) {
+    double angulo = 2 * M_PI * 180 / (M_PI * copias);
+    agregar(MAT_Traslacion(radio, 0, radio));
+
+    for (int i = 0; i < copias; i++) {
+        agregar ( MAT_Traslacion(radio, 0, 0) );
+        agregar( new Cilindro_escena() );
+        agregar (MAT_Traslacion(-radio, 0, 0));
+        agregar(MAT_Rotacion(angulo, 0, 1, 0));
+    }
+    agregar (MAT_Traslacion(-2 * radio, 0, -2 * radio));
+
+    for (int i = 0; i < copias; i++) {
+        agregar ( MAT_Traslacion(radio, 0, 0) );
+        agregar( new Cilindro_alt() );
+        agregar (MAT_Traslacion(-radio, 0, 0));
+        agregar(MAT_Rotacion(angulo, 0, 1, 0));
+    }
+
+    ponerIdentificador(-1);
+}
+
+Cilindro_alt::Cilindro_alt(int n) {
+    Textura * tex = new Textura("../recursos/imgs/window-icon.jpg");
+    agregar( new Material(tex, 0.3, 0.1, 0.1, 4));
+    agregar(new MallaCil(n));
+
+    ponerIdentificador(generar_ident_unico());
+}
+
+Cilindro_escena::Cilindro_escena() {
+    Textura * tex = new Textura("../recursos/imgs/window-icon.jpg");
+    agregar( new Material(tex, 0.3, 0.1, 0.1, 4));
+
+    agregar ( new Cilindro(30, 30) );
+
+    ponerIdentificador(generar_ident_unico());
+}

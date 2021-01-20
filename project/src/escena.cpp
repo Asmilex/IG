@@ -290,6 +290,15 @@ Escena5::Escena5() {
    cout << "hecho." << endl << flush ;
 }
 
+Escena6::Escena6() {
+   using namespace std;
+   cout << "Creando objetos de escena 6 .... " << flush;
+
+   objetos.push_back( new Sistema_cilindros(10, 10) );
+
+
+   cout << "hecho." << endl << flush ;
+}
 
 // ----------------------------------------------------------------------
 // COMPLETAR: Práctica 5

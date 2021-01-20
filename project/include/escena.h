@@ -119,4 +119,10 @@ class Escena5: public Escena
       Escena5();
 };
 
+class Escena6: public Escena
+{
+   public:
+      Escena6();
+};
+
 #endif // ESCENA_H

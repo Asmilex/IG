@@ -467,6 +467,7 @@ void Inicializar( int argc, char *argv[] )
 
    // crear los objetos y las escenas que forman, insertar escenas en 'escenas'
 
+   escenas.push_back( new Escena6() );
    escenas.push_back( new Escena5() );
    escenas.push_back( new Escena4() );
    escenas.push_back( new Escena1() );

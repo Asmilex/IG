@@ -116,4 +116,21 @@
 
     Tupla3f Hex_a_tupla (int hexValue);
 
+
+// ────────────────────────────────────────────────────────────────────────────────
+
+    class Sistema_cilindros : public NodoGrafoEscena {
+        float radio;
+        public:
+            Sistema_cilindros(float radio, int copias);
+    };
+    class Cilindro_alt: public NodoGrafoEscena {
+        public:
+            Cilindro_alt(int n = 10);
+    };
+
+    class Cilindro_escena: public NodoGrafoEscena {
+        public:
+            Cilindro_escena();
+    };
 #endif

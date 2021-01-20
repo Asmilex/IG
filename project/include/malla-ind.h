@@ -122,4 +122,9 @@ class NodoCubo24 : public NodoGrafoEscena{
       NodoCubo24();
 };
 
+class MallaCil : public MallaInd {
+   public:
+      MallaCil(const int n);
+};
+
 #endif
