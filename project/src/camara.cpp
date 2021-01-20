@@ -353,7 +353,7 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          // .....
          // (nota: los ejes no cambian)
 
-         punto_atencion = punto_atencion - (float)(da/5.0) * eje[0] + (float)(db/5.0) * eje[1];
+         punto_atencion = punto_atencion + (float)(da/5.0) * eje[0] + (float)(db/5.0) * eje[1];
 
          break ;
       }
